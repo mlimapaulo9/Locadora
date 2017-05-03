@@ -64,14 +64,12 @@ public class PesquisarController{
 
 	@FXML
 	public void initialize() {
-		System.out.println("incializando pesquisa");
+		Principal.log("Inicializando Pesquisa");
 	
 		for (int i = 1950; i <= LocalDate.now().getYear(); i++) {
 			filmeAno.getItems().add(i);			
 		}
 		filmeAno.setValue(LocalDate.now().getYear());
-		
-		PesquisarController.subTitulo.setText("Pesquisar Filme");
 		
 		TabChanger tabChanger = new TabChanger();
 		tabFilme.setOnSelectionChanged(tabChanger);
@@ -79,15 +77,13 @@ public class PesquisarController{
 		tabCliente.setOnSelectionChanged(tabChanger);
 		
 		tab.getSelectionModel().select(tabFilme);
-		
-		System.out.println(Principal.isAdmin());
 	}	
 	
 	private class TabChanger implements EventHandler<Event> {
 
 		@Override
 		public void handle(Event event) {
-			PesquisarController.subTitulo.setText("Pesquisar " + ((Tab)event.getSource()).getText());
+			Principal.setSubTitulo("Pesquisar " + ((Tab)event.getSource()).getText());
 		}
 	}
 	

@@ -1,9 +1,17 @@
 package model;
 
 public abstract class Midia {
+	protected int id;
 	protected String titulo;
 	protected int quant;
 	protected boolean alugado;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getTitulo() {
 		return titulo;
 	}

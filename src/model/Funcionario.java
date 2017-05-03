@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -39,6 +40,15 @@ public class Funcionario extends Usuario {
 		}
 	}
 	
+	public boolean autenticar(String login, String senha) {
+		if (senha.equals(this.getSenha())) {
+			return true;
+		}
+		return false;
+	}
+	
+	// FUNÇÕES ESTÀTICAS
+	
 	public static Container<Funcionario> carregarDoArquivo() {
 		Type funcionario = new TypeToken<Container<Funcionario>>() {}.getType();
 		Gson gson = new Gson();
@@ -53,21 +63,39 @@ public class Funcionario extends Usuario {
 		return func;				
 	}
 	
+	public static void salvar() {
+		Gson gson = new Gson();
+		
+		try (FileWriter writer = new FileWriter("src/data/funcionarios.db")) {
+
+            gson.toJson(Funcionario.getFuncionarios(), writer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public static Container<Funcionario> getFuncionarios() {
+		return Principal.getFuncionarios();
+	}
+	
+	public static void add(Funcionario func) {
+		getFuncionarios().getLista().add(func);
+		getFuncionarios().setQuant(1);
+	}
+	public static void remove(int pos) {
+		getFuncionarios().getLista().remove(pos);
+		getFuncionarios().setQuant(-1);
+	}
+	
 	public static Funcionario buscar(String nome) {
 		
-		for (int i = 0; i < Principal.getFuncionarios().getQuant(); i++) {
-			if (nome.equals(Principal.getFuncionarios().getLista().get(i).getNome())) {
-				return Principal.getFuncionarios().getLista().get(i);
+		for (int i = 0; i < getFuncionarios().getQuant(); i++) {
+			if (nome.equals(getFuncionarios().getLista().get(i).getNome())) {
+				return getFuncionarios().getLista().get(i);
 			}
 		}
 		return null;		
-	}
-	
-	public boolean autenticar(String login, String senha) {
-		if (senha.equals(this.getSenha())) {
-			return true;
-		}
-		return false;
 	}
 
 }

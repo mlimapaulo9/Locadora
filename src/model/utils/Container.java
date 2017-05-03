@@ -6,6 +6,7 @@ import java.util.List;
 public class Container <T> {
 	private List<T> lista;
 	private int quant;
+	private int lastId;
 	
 	public Container() {
 		this.lista = new ArrayList<T>();
@@ -23,6 +24,20 @@ public class Container <T> {
 		return quant;
 	}
 	public void setQuant(int quant) {
-		this.quant = quant;
+		this.setQuant(quant, false);
+	}
+	public void setQuant(int quant, boolean forceSet) {
+		if (forceSet) {
+			this.quant = quant;
+		}
+		else {
+			this.quant += quant;
+		}
+	}
+	public int getLastId() {
+		return lastId;
+	}
+	public void setLastId(int lastId) {
+		this.lastId = lastId;
 	}
 }

@@ -19,7 +19,7 @@ public class LoginController {
 	private Login model;
 	
 	@FXML public void initialize() {
-		System.out.println("inicializando login");
+		Principal.log("Inicializando Login");
 		this.login.setText("noberto");
 		this.senha.setText("123");
 	}
