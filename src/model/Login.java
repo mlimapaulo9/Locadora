@@ -17,7 +17,7 @@ public class Login {
 					System.out.println("olá");
 					Principal.setAdmin(true);
 				}
-				principal.telaPesquisa();
+				principal.telaPrincipal();
 				
 			} catch (Exception e) {
 				e.printStackTrace();

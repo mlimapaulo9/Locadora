@@ -38,7 +38,6 @@ public class Principal extends Application {
 		Principal.funcionarios = Funcionario.carregarDoArquivo();
 		setPalco(palco);
 		this.telaLogin();
-		System.out.println(Principal.isAdmin());
 	}
 	public static void setPalco(Stage palco) {
 		Principal.palco = palco;
@@ -66,12 +65,29 @@ public class Principal extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void telaPesquisa() throws Exception {
+	public static void telaPrincipal() throws Exception {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Principal.fxml"));
+			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
+			Pane raiz = loader.load();
+			
+			raiz.getChildren().get(0).toFront();
+			Principal.getSubTitulo().toFront();
+			
+			Scene cena = new Scene(raiz);
+			
+			palco.setScene(cena);
+			palco.show();			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void telaPesquisa() throws Exception {
+		try {
+			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
 			PesquisarController.setSubTitulo(Principal.getSubTitulo());
-			Pane pesquisa = FXMLLoader.load(getClass().getResource("../view/Pesquisar.fxml"));
+			Pane pesquisa = FXMLLoader.load(Principal.class.getResource("../view/Pesquisar.fxml"));
 			
 			raiz.getChildren().set(1, pesquisa);
 			raiz.getChildren().get(0).toFront();
@@ -87,13 +103,13 @@ public class Principal extends Application {
 		}
 		
 	}
-	public void telaCadastroFilmes() throws Exception
+	public static void telaCadastroFilmes() throws Exception
 	{
 		try{
 			System.out.println("Cadastro Filme");
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Principal.fxml"));
+			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(getClass().getResource("../view/CadastroFilme.fxml"));
+			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("../view/CadastroFilme.fxml"));
 			
 			raiz.getChildren().set(1, cadastroFilme);
 			raiz.getChildren().get(0).toFront();

@@ -35,9 +35,7 @@ public class PrincipalController {
 		Platform.exit();
 	}
 	
-	@FXML protected void abreCadastroFilmes(ActionEvent event)
-	{
-
-		
+	@FXML protected void abreCadastroFilmes(ActionEvent event) throws Exception	{
+		Principal.telaCadastroFilmes();
 	}
 }

@@ -20,7 +20,7 @@
               <items>
                   <MenuItem mnemonicParsing="false" text="Usuario" />
                   <MenuItem mnemonicParsing="false" text="Cliente" />
-                  <MenuItem fx:id="menuFilmes" mnemonicParsing="false" onAction="#telaCadastroFilmes" text="Filmes" />
+                  <MenuItem fx:id="menuFilmes" mnemonicParsing="false" onAction="#abreCadastroFilmes" text="Filmes" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ações">
