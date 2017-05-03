@@ -1,6 +1,6 @@
 package model;
 
-public class Album {
+public class Album extends Midia{
 
 	private String nomeBanda;
 	private String estilo;

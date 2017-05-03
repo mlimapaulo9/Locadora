@@ -87,6 +87,32 @@ public class Principal extends Application {
 		}
 		
 	}
+	public void telaCadastroFilmes() throws Exception
+	{
+		try{
+			System.out.println("Cadastro Filme");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Principal.fxml"));
+			Pane raiz = loader.load();
+			Pane cadastroFilme = FXMLLoader.load(getClass().getResource("../view/CadastroFilme.fxml"));
+			
+			raiz.getChildren().set(1, cadastroFilme);
+			raiz.getChildren().get(0).toFront();
+			
+			Principal.getSubTitulo().toFront();
+			
+			Scene cena = new Scene(raiz);
+			
+			palco.setScene(cena);
+			palco.show();
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+		
+	}
 	public static void main(String[] args) {
 		launch();
 	}
