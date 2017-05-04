@@ -2,33 +2,29 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import model.Filme;
+import javafx.scene.control.TextField;
 import view.Principal;
 
-public class FilmeController {
-
+public class AlbumController {
 	@FXML
 	private TextField titulo;
 	@FXML
-	private TextField genero;
+	private TextField nomeBanda;
 	@FXML
-	private TextField diretor;
+	private TextField estilo;
 	@FXML
 	private ComboBox<Integer> ano;
 	@FXML
 	private ComboBox<Integer> quant;
 	@FXML
 	private TextField id;
-
+	
 	@FXML
-	public void initialize() {
-		Principal.log("Inicializando CadastroFilme");
+	private void initialize() {
+		Principal.log("Inicializando CadastroAlbum");
 	}
-
+	
 	@FXML
 	private void cadastrar(ActionEvent event) {
 		
@@ -36,11 +32,10 @@ public class FilmeController {
 	
 	@FXML
 	private void limpar(ActionEvent event) {
-		titulo.clear();
-		genero.clear();
-		diretor.clear();
+		titulo.clear();;
+		nomeBanda.clear();;
+		estilo.clear();;
 		ano.getSelectionModel().selectLast();
 		quant.getSelectionModel().selectFirst();
 	}
-
 }

@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <children>
-      <MenuBar fx:id="menuBar" layoutY="-1.0" prefWidth="600.0">
+      <MenuBar fx:id="menuBar" maxHeight="30.0" maxWidth="600.0" minHeight="30.0" minWidth="600.0" prefHeight="30.0" prefWidth="600.0">
         <menus>
           <Menu mnemonicParsing="false" text="Ações">
             <items>
-              <MenuItem mnemonicParsing="false" text="Trocar Usuário" />
+              <MenuItem mnemonicParsing="false" onAction="#trocarUsuario" text="Trocar Usuário" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
             </items>
@@ -24,9 +24,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#abrePesquisar" text="Pesquisar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuFuncionario" mnemonicParsing="false" onAction="#abreCadastroFuncionarios" text="Funcionário" />
-                  <MenuItem mnemonicParsing="false" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#abreCadastroClientes" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#abreCadastroFilmes" text="Filmes" />
-                  <MenuItem mnemonicParsing="false" text="Album" />
+                  <MenuItem mnemonicParsing="false" onAction="#abreCadastroAlbuns" text="Album" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ajuda">
@@ -37,7 +37,7 @@
         </menus>
       </MenuBar>
       <Pane fx:id="painelPrincipal" layoutY="30.0" prefHeight="370.0" prefWidth="600.0" />
-      <Label fx:id="subTitulo" alignment="CENTER_RIGHT" layoutX="393.0" layoutY="4.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" textAlignment="RIGHT">
+      <Label fx:id="subTitulo" alignment="CENTER_RIGHT" layoutX="393.0" layoutY="6.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

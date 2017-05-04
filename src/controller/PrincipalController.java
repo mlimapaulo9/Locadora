@@ -11,35 +11,61 @@ import javafx.scene.layout.Pane;
 import view.Principal;
 
 public class PrincipalController {
-	@FXML private MenuBar menuBar;
-	@FXML private Pane painelPrincipal;
-	@FXML private Label subTitulo;
-	@FXML private MenuItem menuFuncionario;
+	@FXML
+	private MenuBar menuBar;
+	@FXML
+	private Pane painelPrincipal;
+	@FXML
+	private Label subTitulo;
+	@FXML
+	private MenuItem menuFuncionario;
 
-	@FXML public void initialize() {
-		Principal.log("Inicializando Principal");
+	@FXML
+	public void initialize() {
 		Principal.setSubTitulo((Label) subTitulo);
 		if (!Principal.isAdmin()) {
 			menuFuncionario.setVisible(false);
-		}		
+		}
 	}
 	
-	@FXML protected void sair() {
+	@FXML
+	private void trocarUsuario() throws Exception {
+		Principal.setAdmin(false);
+		Principal.telaLogin();
+	}
+
+	@FXML
+	private void sair() {
 		Platform.exit();
 	}
-	
-	@FXML protected void abrePesquisar(ActionEvent event) throws Exception	{
+
+	@FXML
+	private void abrePesquisar(ActionEvent event) throws Exception {
 		Principal.telaPesquisa();
 		Principal.setSubTitulo("Pesquisar Filme");
 
 	}
-	
-	@FXML protected void abreCadastroFuncionarios(ActionEvent event) throws Exception {
+
+	@FXML
+	private void abreCadastroFuncionarios(ActionEvent event) throws Exception {
 		Principal.telaCadastroFuncionarios();
 		Principal.setSubTitulo("Cadastrar Funcionário");
 	}
 	
-	@FXML protected void abreCadastroFilmes(ActionEvent event) throws Exception	{
+	@FXML
+	private void abreCadastroClientes(ActionEvent event) throws Exception {
+		Principal.telaCadastroClientes();
+		Principal.setSubTitulo("Cadastrar Cliente");
+	}
+	
+	@FXML
+	private void abreCadastroAlbuns(ActionEvent event) throws Exception {
+		Principal.telaCadastroAlbuns();
+		Principal.setSubTitulo("Cadastrar Album");
+	}
+
+	@FXML
+	private void abreCadastroFilmes(ActionEvent event) throws Exception {
 		Principal.telaCadastroFilmes();
 		Principal.setSubTitulo("Cadastrar Filme");
 	}

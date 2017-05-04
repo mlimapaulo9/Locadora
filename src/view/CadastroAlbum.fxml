@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="370.0" maxWidth="600.0" minHeight="370.0" minWidth="600.0" prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FilmeController">
+<Pane maxHeight="370.0" maxWidth="600.0" minHeight="370.0" minWidth="600.0" prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlbumController">
    <children>
       <VBox prefHeight="300.0" prefWidth="600.0" spacing="7.0">
          <children>
             <Label text="Título" />
             <TextField fx:id="titulo" prefHeight="31.0" prefWidth="547.0" />
-            <Label text="Diretor" />
-            <TextField fx:id="diretor" prefHeight="31.0" prefWidth="547.0" />
-            <Label text="Gênero" />
-            <TextField fx:id="genero" prefHeight="31.0" prefWidth="547.0" />
+            <Label text="Autor/Banda" />
+            <TextField fx:id="nomeBanda" prefHeight="31.0" prefWidth="547.0" />
+            <Label text="Estilo" />
+            <TextField fx:id="estilo" prefHeight="31.0" prefWidth="547.0" />
             <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="100.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="7.0">

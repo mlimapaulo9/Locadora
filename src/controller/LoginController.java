@@ -12,21 +12,31 @@ public class LoginController {
 	/*
 	 * Tela de Login
 	 */
-	@FXML private TextField login;
-	@FXML private PasswordField senha;
-	@FXML private Label incorrectInfo;
-	
-	private Login model;
-	
-	@FXML public void initialize() {
+	@FXML
+	private TextField login;
+	@FXML
+	private PasswordField senha;
+	@FXML
+	private Label incorrectInfo;
+
+	@FXML
+	public void initialize() {
 		Principal.log("Inicializando Login");
 		this.login.setText("noberto");
 		this.senha.setText("123");
 	}
-	
-	@FXML protected void autenticar(ActionEvent event) { 
-		model = new Login();
-		model.autenticar(login.getText(), senha.getText(), incorrectInfo);
+
+	@FXML
+	protected void autenticar(ActionEvent event) {
+		if (Login.autenticar(login.getText(), senha.getText())) {
+			try {
+				Principal.telaPrincipal();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			incorrectInfo.setVisible(true);
+		}
 	}
-	
+
 }
