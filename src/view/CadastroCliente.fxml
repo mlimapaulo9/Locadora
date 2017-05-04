@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="370.0" maxWidth="600.0" minHeight="370.0" minWidth="600.0" prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
    <children>
@@ -75,6 +76,11 @@
                   </VBox>
                </children>
             </HBox>
+            <Label fx:id="lblErros" alignment="TOP_LEFT" maxHeight="104.0" maxWidth="400.0" minHeight="104.0" minWidth="400.0" text="Erros" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

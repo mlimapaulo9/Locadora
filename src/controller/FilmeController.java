@@ -31,9 +31,9 @@ public class FilmeController {
 
 	@FXML
 	private void cadastrar(ActionEvent event) {
-		
+
 	}
-	
+
 	@FXML
 	private void limpar(ActionEvent event) {
 		titulo.clear();

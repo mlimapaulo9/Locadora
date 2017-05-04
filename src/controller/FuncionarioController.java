@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import model.Funcionario;
 import model.utils.exceptions.NomeEmUsoException;
 import model.utils.exceptions.NomeInvalidoException;
@@ -15,12 +14,6 @@ import model.utils.exceptions.SenhaInvalidaException;
 import view.Principal;
 
 public class FuncionarioController {
-	@FXML
-	private Label lblNome;
-	@FXML
-	private Label lblCargo;
-	@FXML
-	private Label lblSenha;
 	@FXML
 	private TextField nome;
 	@FXML
@@ -77,8 +70,10 @@ public class FuncionarioController {
 			Funcionario.add(temp);
 			Funcionario.salvar();
 			Principal.log("Salvando...");
+			
 			lblErros.setStyle("-fx-text-fill: green");
 			lblErros.setText("Funcionário cadastrado com sucesso!");
+			
 			this.limpar(event);
 		} else {
 			lblErros.setStyle("-fx-text-fill: red");
@@ -93,6 +88,7 @@ public class FuncionarioController {
 		nome.clear();
 		radOperador.setSelected(true);
 		senha.clear();
-		if (event.getSource().equals(btnCancelar)) lblErros.setVisible(false);
+		if (event.getSource().equals(btnCancelar))
+			lblErros.setVisible(false);
 	}
 }

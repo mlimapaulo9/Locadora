@@ -24,15 +24,13 @@ public class Funcionario extends Usuario {
 	public String getNome() {
 		return super.nome;
 	}
-	
+
 	public void setNome(String nome) {
 		if (nome.isEmpty() || nome.length() < 4) {
 			throw new NomeInvalidoException();
-		}
-		else if (Funcionario.buscar(nome) != null) {
+		} else if (Funcionario.buscar(nome) != null) {
 			throw new NomeEmUsoException();
-		}
-		else {
+		} else {
 			super.nome = nome;
 		}
 	}
@@ -120,10 +118,11 @@ public class Funcionario extends Usuario {
 		}
 		return null;
 	}
-	
+
 	public static int getLastId() {
 		return Funcionario.getFuncionarios().getLastId();
 	}
+
 	public static void incLastId(int lastId) {
 		Funcionario.getFuncionarios().setLastId(lastId);
 	}

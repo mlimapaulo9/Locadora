@@ -42,9 +42,9 @@ public class Principal extends Application {
 	public static Container<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
-
-	public static void setFuncionarios() {
-
+	
+	public static Container<Album> getAlbuns() {
+		return albuns;
 	}
 
 	public static Label getSubTitulo() {
@@ -63,6 +63,7 @@ public class Principal extends Application {
 	public void start(Stage palco) throws Exception {
 		Principal.setAdmin(false);
 		Principal.funcionarios = Funcionario.carregar();
+		Principal.albuns = Album.carregar();
 
 		setPalco(palco);
 		Principal.telaLogin();
@@ -167,6 +168,7 @@ public class Principal extends Application {
 
 		}
 	}
+
 	public static void telaCadastroClientes() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
@@ -189,6 +191,7 @@ public class Principal extends Application {
 
 		}
 	}
+
 	public static void telaCadastroAlbuns() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
@@ -209,8 +212,9 @@ public class Principal extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		}		
+		}
 	}
+
 	public static void telaCadastroFilmes() throws Exception {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));

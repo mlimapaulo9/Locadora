@@ -207,7 +207,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="363.0" layoutY="34.0" text="Resultado">
+      <Label layoutX="363.0" layoutY="7.0" text="Resultado">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

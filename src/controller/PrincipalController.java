@@ -27,7 +27,7 @@ public class PrincipalController {
 			menuFuncionario.setVisible(false);
 		}
 	}
-	
+
 	@FXML
 	private void trocarUsuario() throws Exception {
 		Principal.setAdmin(false);
@@ -51,13 +51,13 @@ public class PrincipalController {
 		Principal.telaCadastroFuncionarios();
 		Principal.setSubTitulo("Cadastrar Funcionário");
 	}
-	
+
 	@FXML
 	private void abreCadastroClientes(ActionEvent event) throws Exception {
 		Principal.telaCadastroClientes();
 		Principal.setSubTitulo("Cadastrar Cliente");
 	}
-	
+
 	@FXML
 	private void abreCadastroAlbuns(ActionEvent event) throws Exception {
 		Principal.telaCadastroAlbuns();

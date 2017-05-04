@@ -3,8 +3,8 @@ package model;
 public abstract class Midia {
 	protected int id;
 	protected String titulo;
-	protected int quant;
-	protected boolean alugado;
+	protected int quantidade;
+	protected int alugado;
 
 	public int getId() {
 		return id;
@@ -23,18 +23,18 @@ public abstract class Midia {
 	}
 
 	public int getQuant() {
-		return quant;
+		return quantidade;
 	}
 
 	public void setQuant(int quant) {
-		this.quant = quant;
+		this.quantidade = quant;
 	}
 
-	public boolean isAlugado() {
+	public int isAlugado() {
 		return alugado;
 	}
 
-	public void setAlugado(boolean alugado) {
+	public void setAlugado(int alugado) {
 		this.alugado = alugado;
 	}
 
