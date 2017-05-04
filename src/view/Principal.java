@@ -79,7 +79,7 @@ public class Principal extends Application {
 
 	public static void telaLogin() throws Exception {
 		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("loginscreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("LoginScreen.fxml"));
 
 			Parent raiz = loader.load();
 
@@ -128,7 +128,7 @@ public class Principal extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane pesquisa = FXMLLoader.load(Principal.class.getResource("../view/Pesquisar.fxml"));
+			Pane pesquisa = FXMLLoader.load(Principal.class.getResource("Pesquisar.fxml"));
 
 			raiz.getChildren().set(1, pesquisa);
 			raiz.getChildren().get(0).toFront();
@@ -150,7 +150,7 @@ public class Principal extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("../view/CadastroFuncionario.fxml"));
+			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroFuncionario.fxml"));
 
 			raiz.getChildren().set(1, cadastroFilme);
 			raiz.getChildren().get(0).toFront();
@@ -173,7 +173,7 @@ public class Principal extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("../view/CadastroCliente.fxml"));
+			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroCliente.fxml"));
 
 			raiz.getChildren().set(1, cadastroFilme);
 			raiz.getChildren().get(0).toFront();
@@ -196,7 +196,7 @@ public class Principal extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("../view/CadastroAlbum.fxml"));
+			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroAlbum.fxml"));
 
 			raiz.getChildren().set(1, cadastroFilme);
 			raiz.getChildren().get(0).toFront();
@@ -219,7 +219,7 @@ public class Principal extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("../view/CadastroFilme.fxml"));
+			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroFilme.fxml"));
 
 			raiz.getChildren().set(1, cadastroFilme);
 			raiz.getChildren().get(0).toFront();

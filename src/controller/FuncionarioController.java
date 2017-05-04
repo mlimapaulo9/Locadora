@@ -8,9 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import model.Funcionario;
-import model.utils.exceptions.NomeEmUsoException;
-import model.utils.exceptions.NomeInvalidoException;
-import model.utils.exceptions.SenhaInvalidaException;
+import model.utils.exceptions.*;
 import view.Principal;
 
 public class FuncionarioController {
@@ -44,10 +42,10 @@ public class FuncionarioController {
 		Funcionario temp = new Funcionario();
 		try {
 			temp.setNome(nome.getText());
-		} catch (NomeEmUsoException e) {
+		} catch (AtributoEmUsoException e) {
 			erros += e.getMessage() + "\n";
 			temErro = true;
-		} catch (NomeInvalidoException e) {
+		} catch (IllegalArgumentException e) {
 			erros += e.getMessage() + "\n";
 			temErro = true;
 		}
@@ -58,7 +56,7 @@ public class FuncionarioController {
 		}
 		try {
 			temp.setSenha(senha.getText());
-		} catch (SenhaInvalidaException e) {
+		} catch (IllegalArgumentException e) {
 			erros += e.getMessage() + "\n";
 			temErro = true;
 		}
@@ -73,6 +71,7 @@ public class FuncionarioController {
 			
 			lblErros.setStyle("-fx-text-fill: green");
 			lblErros.setText("Funcionário cadastrado com sucesso!");
+			id.setText(Integer.toString(Funcionario.getLastId() + 1));
 			
 			this.limpar(event);
 		} else {

@@ -10,19 +10,44 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import model.utils.Container;
+import model.utils.exceptions.*;
 import view.Principal;
 
 public class Album extends Midia {
 
 	private String nomeBanda;
 	private String estilo;
-
+	
+	public void setTitulo(String titulo) {
+		this.setTitulo(titulo, false);
+	}
+	
+	public void setTitulo(String titulo, boolean forceSet) {
+		if (titulo.isEmpty()) {
+			throw new IllegalArgumentException("Título inválido!");
+		} else if (!forceSet && Album.buscarTitulo(titulo) != null) {
+			throw new AtributoEmUsoException("Título");
+		} else {
+			super.titulo = titulo;
+		}
+	}
+	
+	public void setNomeBanda(String nomeBanda) {
+		this.setNomeBanda(nomeBanda, false);
+	}
+	
+	public void setNomeBanda(String nomeBanda, boolean forceSet) {
+		if (nomeBanda.isEmpty()) {
+			throw new IllegalArgumentException("Nome de banda/autor inválido!");
+		} else if (!forceSet && Album.buscarBanda(nomeBanda) != null) {
+			throw new AtributoEmUsoException("Nome de banda/autor");
+		} else {
+			this.nomeBanda = nomeBanda;
+		}
+	}
+	
 	public String getNomeBanda() {
 		return nomeBanda;
-	}
-
-	public void setNomeBanda(String nomeBanda) {
-		this.nomeBanda = nomeBanda;
 	}
 
 	public String getEstilo() {
@@ -30,7 +55,14 @@ public class Album extends Midia {
 	}
 
 	public void setEstilo(String estilo) {
-		this.estilo = estilo;
+		this.setEstilo(estilo, false);
+	}
+	public void setEstilo(String estilo, boolean forceSet) {
+		if (estilo.isEmpty() || estilo.length() < 3) {
+			throw new IllegalArgumentException("Estilo inválido!");
+		} else {
+			this.estilo = estilo;
+		}
 	}
 	
 	//FUNÇÕES ESTÁTICAS
@@ -76,10 +108,30 @@ public class Album extends Midia {
 		getAlbuns().setQuant(-1);
 	}
 
-	public static Album buscar(String titulo) {
+	public static Album buscarTitulo(String titulo) {
 
 		for (int i = 0; i < getAlbuns().getQuant(); i++) {
-			if (titulo.equals(getAlbuns().getLista().get(i).getTitulo())) {
+			if (titulo.equalsIgnoreCase(getAlbuns().getLista().get(i).getTitulo())) {
+				return getAlbuns().getLista().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Album buscarBanda(String banda) {
+
+		for (int i = 0; i < getAlbuns().getQuant(); i++) {
+			if (banda.equalsIgnoreCase(getAlbuns().getLista().get(i).getNomeBanda())) {
+				return getAlbuns().getLista().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Album buscarEstilo(String estilo) {
+
+		for (int i = 0; i < getAlbuns().getQuant(); i++) {
+			if (estilo.equalsIgnoreCase(getAlbuns().getLista().get(i).getNomeBanda())) {
 				return getAlbuns().getLista().get(i);
 			}
 		}

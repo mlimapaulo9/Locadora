@@ -4,7 +4,7 @@ public abstract class Midia {
 	protected int id;
 	protected String titulo;
 	protected int quantidade;
-	protected int alugado;
+	protected int alugados;
 
 	public int getId() {
 		return id;
@@ -22,20 +22,32 @@ public abstract class Midia {
 		this.titulo = titulo;
 	}
 
-	public int getQuant() {
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuant(int quant) {
-		this.quantidade = quant;
+	public void setQuantidade(int quantidade) {
+		if (quantidade > 0 && quantidade <= 5)
+		{
+			this.quantidade = quantidade;
+		}
+		else {
+			throw new IllegalArgumentException("Quantidade não pode exceder 5.");
+		}	
 	}
 
-	public int isAlugado() {
-		return alugado;
+	public int getAlugados() {
+		return this.alugados;
 	}
 
-	public void setAlugado(int alugado) {
-		this.alugado = alugado;
+	public void setAlugados(int alugados) {
+		if (alugados >= 0 && alugados <= this.getQuantidade())
+		{
+			this.alugados = alugados;
+		}
+		else {
+			throw new IllegalArgumentException("Número de itens alugados não pode exceder a quantidade disponível.");
+		}		
 	}
 
 }

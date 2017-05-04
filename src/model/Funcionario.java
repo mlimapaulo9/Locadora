@@ -5,15 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
-import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import model.utils.Container;
-import model.utils.exceptions.NomeEmUsoException;
-import model.utils.exceptions.NomeInvalidoException;
-import model.utils.exceptions.SenhaInvalidaException;
+import model.utils.exceptions.*;
 import view.Principal;
 
 public class Funcionario extends Usuario {
@@ -27,9 +23,9 @@ public class Funcionario extends Usuario {
 
 	public void setNome(String nome) {
 		if (nome.isEmpty() || nome.length() < 4) {
-			throw new NomeInvalidoException();
+			throw new IllegalArgumentException("Nome de usuário inválido!");
 		} else if (Funcionario.buscar(nome) != null) {
-			throw new NomeEmUsoException();
+			throw new AtributoEmUsoException("Nome de usuário");
 		} else {
 			super.nome = nome;
 		}
@@ -41,7 +37,7 @@ public class Funcionario extends Usuario {
 
 	public void setSenha(String senha) {
 		if (senha.isEmpty() || senha.length() < 6) {
-			throw new SenhaInvalidaException();
+			throw new IllegalArgumentException("Senha inválida!");
 		} else {
 			this.senha = senha;
 		}
@@ -112,7 +108,7 @@ public class Funcionario extends Usuario {
 	public static Funcionario buscar(String nome) {
 
 		for (int i = 0; i < getFuncionarios().getQuant(); i++) {
-			if (nome.equals(getFuncionarios().getLista().get(i).getNome())) {
+			if (nome.equalsIgnoreCase(getFuncionarios().getLista().get(i).getNome())) {
 				return getFuncionarios().getLista().get(i);
 			}
 		}
