@@ -45,6 +45,14 @@ public class Container<T> {
 	}
 
 	public void setLastId(int lastId) {
-		this.lastId = lastId;
+		this.setLastId(lastId, false);
+	}
+	public void setLastId(int lastId, boolean reset) {
+		if (reset) {
+			this.lastId = lastId;
+		}
+		else {
+			this.lastId += lastId;
+		}
 	}
 }

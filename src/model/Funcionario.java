@@ -5,11 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import model.utils.Container;
+import model.utils.exceptions.NomeEmUsoException;
+import model.utils.exceptions.NomeInvalidoException;
+import model.utils.exceptions.SenhaInvalidaException;
 import view.Principal;
 
 public class Funcionario extends Usuario {
@@ -17,9 +21,20 @@ public class Funcionario extends Usuario {
 	private String senha;
 	private String cargo;
 
-	public static int getLastId() {
-
-		return Funcionario.getFuncionarios().getLastId();
+	public String getNome() {
+		return super.nome;
+	}
+	
+	public void setNome(String nome) {
+		if (nome.isEmpty() || nome.length() < 4) {
+			throw new NomeInvalidoException();
+		}
+		else if (Funcionario.buscar(nome) != null) {
+			throw new NomeEmUsoException();
+		}
+		else {
+			super.nome = nome;
+		}
 	}
 
 	public String getSenha() {
@@ -27,11 +42,10 @@ public class Funcionario extends Usuario {
 	}
 
 	public void setSenha(String senha) {
-		if (!senha.isEmpty() && senha.length() < 6) {
-			this.senha = senha;
+		if (senha.isEmpty() || senha.length() < 6) {
+			throw new SenhaInvalidaException();
 		} else {
-			throw new IllegalArgumentException(
-					"Campo \"Senha\" inválido! A senha precisa ter pelo menos 6 caracteres.");
+			this.senha = senha;
 		}
 	}
 
@@ -56,7 +70,7 @@ public class Funcionario extends Usuario {
 
 	// FUNÇÕES ESTÀTICAS
 
-	public static Container<Funcionario> carregarDoArquivo() {
+	public static Container<Funcionario> carregar() {
 		Type funcionario = new TypeToken<Container<Funcionario>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -89,6 +103,7 @@ public class Funcionario extends Usuario {
 	public static void add(Funcionario func) {
 		getFuncionarios().add(func);
 		getFuncionarios().setQuant(1);
+		incLastId(1);
 	}
 
 	public static void remove(int pos) {
@@ -104,6 +119,13 @@ public class Funcionario extends Usuario {
 			}
 		}
 		return null;
+	}
+	
+	public static int getLastId() {
+		return Funcionario.getFuncionarios().getLastId();
+	}
+	public static void incLastId(int lastId) {
+		Funcionario.getFuncionarios().setLastId(lastId);
 	}
 
 }

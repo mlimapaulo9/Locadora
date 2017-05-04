@@ -62,7 +62,7 @@ public class Principal extends Application {
 	@Override
 	public void start(Stage palco) throws Exception {
 		Principal.setAdmin(false);
-		Principal.funcionarios = Funcionario.carregarDoArquivo();
+		Principal.funcionarios = Funcionario.carregar();
 
 		setPalco(palco);
 		Principal.telaLogin();

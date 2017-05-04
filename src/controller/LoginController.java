@@ -23,7 +23,7 @@ public class LoginController {
 	public void initialize() {
 		Principal.log("Inicializando Login");
 		this.login.setText("noberto");
-		this.senha.setText("123");
+		this.senha.setText("123456");
 	}
 
 	@FXML

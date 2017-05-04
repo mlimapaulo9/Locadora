@@ -1,1 +1,1 @@
-{"lista":[{"senha":"123","cargo":"Administrador","id":1,"nome":"noberto"},{"senha":"1234","cargo":"Funcionario","id":99,"nome":"testuser"},{"senha":"4321","cargo":"Administrador","id":99,"nome":"testAdmin"}],"quant":3,"lastId":0}
+{"lista":[{"senha":"123456","cargo":"Administrador","id":1,"nome":"noberto"},{"senha":"123456","cargo":"Administrador","id":2,"nome":"marcus"}],"quant":2,"lastId":2}
