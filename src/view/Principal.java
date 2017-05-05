@@ -35,11 +35,12 @@ public class Principal extends Application {
 		Principal.funcionarios = Funcionario.carregar();
 		Principal.albuns = Album.carregar();
 		Principal.filmes = Filme.carregar();
+		Principal.clientes = Cliente.carregar();		
 
 		setPalco(palco);
 		Principal.telaLogin();
 	}
-
+	
 	public static void log(String message) {
 		if (Principal.debug) {
 			System.out.println(message);
@@ -55,19 +56,23 @@ public class Principal extends Application {
 	}
 
 	public static Container<Funcionario> getFuncionarios() {
-		return funcionarios;
+		return Principal.funcionarios;
 	}
 
 	public static Container<Album> getAlbuns() {
-		return albuns;
+		return Principal.albuns;
 	}
 
 	public static Container<Filme> getFilmes() {
-		return filmes;
+		return Principal.filmes;
+	}
+	
+	public static Container<Cliente> getClientes() {
+		return Principal.clientes;
 	}
 
 	public static Label getSubTitulo() {
-		return subTitulo;
+		return Principal.subTitulo;
 	}
 
 	public static void setSubTitulo(Label subTitulo) {

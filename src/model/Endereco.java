@@ -3,38 +3,62 @@ package model;
 public class Endereco {
 	private String logradouro;
 	private String bairro;
-	private int numero;
-	private int cep;
+	private String numero;
+	private String cep;
 
 	public String getLogradouro() {
-		return logradouro;
+		return this.logradouro;
 	}
 
 	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+		if (logradouro.isEmpty() || logradouro.length() < 4) {
+			throw new IllegalArgumentException("Logradouro inválido!");
+		} else {
+			this.logradouro = logradouro;
+		}
 	}
 
 	public String getBairro() {
-		return bairro;
+		return this.bairro;
 	}
 
 	public void setBairro(String bairro) {
-		this.bairro = bairro;
+		if (bairro.isEmpty()) {
+			throw new IllegalArgumentException("Bairro inválido!");
+		} else {
+			this.bairro = bairro;
+		}
 	}
 
-	public int getNumero() {
-		return numero;
+	public String getNumero() {
+		return this.numero;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setNumero(String numero) {
+		int countNum = 0;
+		char arr[] = numero.toCharArray();
+		for (char c : arr) {
+			if (Character.isDigit(c)) {
+				countNum++;
+			}
+		}
+		if (countNum == 0 || numero.isEmpty()) {
+			throw new IllegalArgumentException("Campo \"Número\" inválido!");
+		} else {
+			this.numero = numero;
+		}
 	}
 
-	public int getCep() {
+	public String getCEP() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
-		this.cep = cep;
+	public void setCEP(String cep) {
+		if (cep.isEmpty() || cep.length() != 8) {
+			throw new IllegalArgumentException("CEP inválido! O CEP deve ter 8 digitos númericos.");
+		}
+		else {
+			this.cep = cep;
+		}
 	}
 }
