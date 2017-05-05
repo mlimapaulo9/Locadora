@@ -1,14 +1,12 @@
 package controller;
 
-import java.time.LocalDate;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Album;
-import model.Funcionario;
 import model.utils.exceptions.AtributoEmUsoException;
 import view.Principal;
 
@@ -25,6 +23,8 @@ public class AlbumController {
 	private TextField id;
 	@FXML
 	private Label lblErros;
+	@FXML
+	private Button btnCancelar;
 
 	@FXML
 	private void initialize() {
@@ -110,5 +110,7 @@ public class AlbumController {
 		nomeBanda.clear();
 		estilo.clear();
 		quant.getSelectionModel().selectFirst();
+		if (event.getSource().equals(btnCancelar))
+			lblErros.setVisible(false);
 	}
 }

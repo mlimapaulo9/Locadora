@@ -24,6 +24,21 @@ public class Principal extends Application {
 
 	private static boolean isAdmin;
 	private static boolean debug = true;
+	
+	public static void main(String[] args) {
+		launch();
+	}
+
+	@Override
+	public void start(Stage palco) throws Exception {
+		Principal.setAdmin(false);
+		Principal.funcionarios = Funcionario.carregar();
+		Principal.albuns = Album.carregar();
+		Principal.filmes = Filme.carregar();
+
+		setPalco(palco);
+		Principal.telaLogin();
+	}
 
 	public static void log(String message) {
 		if (Principal.debug) {
@@ -42,9 +57,13 @@ public class Principal extends Application {
 	public static Container<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
-	
+
 	public static Container<Album> getAlbuns() {
 		return albuns;
+	}
+
+	public static Container<Filme> getFilmes() {
+		return filmes;
 	}
 
 	public static Label getSubTitulo() {
@@ -57,16 +76,6 @@ public class Principal extends Application {
 
 	public static void setSubTitulo(String text) {
 		Principal.getSubTitulo().setText(text);
-	}
-
-	@Override
-	public void start(Stage palco) throws Exception {
-		Principal.setAdmin(false);
-		Principal.funcionarios = Funcionario.carregar();
-		Principal.albuns = Album.carregar();
-
-		setPalco(palco);
-		Principal.telaLogin();
 	}
 
 	public static void setPalco(Stage palco) {
@@ -96,149 +105,29 @@ public class Principal extends Application {
 		}
 	}
 
-	public static void telaCarregandoDados() throws Exception {
-		FXMLLoader loader = new FXMLLoader(Principal.class.getResource("CarregandoDados.fxml"));
-
-		Parent raiz = loader.load();
-
-		Scene cena = new Scene(raiz);
-
-		palco.setScene(cena);
-		palco.show();
+	public static void criarTela(String fxmlFile) {
+		Principal.criarTela(fxmlFile, false);
 	}
 
-	public static void telaPrincipal() throws Exception {
+	public static void criarTela(String fxmlFile, boolean isPrincipal) {
 		try {
 			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
 			Pane raiz = loader.load();
 
-			raiz.getChildren().get(0).toFront();
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-
-			palco.setScene(cena);
-			palco.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void telaPesquisa() throws Exception {
-		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-			Pane pesquisa = FXMLLoader.load(Principal.class.getResource("Pesquisar.fxml"));
-
-			raiz.getChildren().set(1, pesquisa);
+			if (!isPrincipal) {
+				Pane subPane = FXMLLoader.load(Principal.class.getResource(fxmlFile + ".fxml"));
+				raiz.getChildren().set(1, subPane);
+			}
 			raiz.getChildren().get(0).toFront();
 			raiz.getChildren().get(0).setLayoutY(30);
-
 			Principal.getSubTitulo().toFront();
 
 			Scene cena = new Scene(raiz);
-
 			palco.setScene(cena);
 			palco.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	public static void telaCadastroFuncionarios() {
-		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroFuncionario.fxml"));
-
-			raiz.getChildren().set(1, cadastroFilme);
-			raiz.getChildren().get(0).toFront();
-			raiz.getChildren().get(0).setLayoutY(30);
-
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-
-			palco.setScene(cena);
-			palco.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	public static void telaCadastroClientes() {
-		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroCliente.fxml"));
-
-			raiz.getChildren().set(1, cadastroFilme);
-			raiz.getChildren().get(0).toFront();
-			raiz.getChildren().get(0).setLayoutY(30);
-
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-
-			palco.setScene(cena);
-			palco.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	public static void telaCadastroAlbuns() {
-		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroAlbum.fxml"));
-
-			raiz.getChildren().set(1, cadastroFilme);
-			raiz.getChildren().get(0).toFront();
-			raiz.getChildren().get(0).setLayoutY(30);
-
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-
-			palco.setScene(cena);
-			palco.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	public static void telaCadastroFilmes() throws Exception {
-		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-			Pane cadastroFilme = FXMLLoader.load(Principal.class.getResource("CadastroFilme.fxml"));
-
-			raiz.getChildren().set(1, cadastroFilme);
-			raiz.getChildren().get(0).toFront();
-			raiz.getChildren().get(0).setLayoutY(30);
-
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-
-			palco.setScene(cena);
-			palco.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	public static void main(String[] args) {
-		launch();
-	}
 }

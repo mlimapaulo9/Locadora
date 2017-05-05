@@ -25,7 +25,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuFuncionario" mnemonicParsing="false" onAction="#abreCadastroFuncionarios" text="Funcionário" />
                   <MenuItem mnemonicParsing="false" onAction="#abreCadastroClientes" text="Cliente" />
-                  <MenuItem mnemonicParsing="false" onAction="#abreCadastroFilmes" text="Filmes" />
+                  <MenuItem mnemonicParsing="false" onAction="#abreCadastroFilmes" text="Filme" />
                   <MenuItem mnemonicParsing="false" onAction="#abreCadastroAlbuns" text="Album" />
               </items>
             </Menu>

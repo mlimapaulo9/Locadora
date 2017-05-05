@@ -55,7 +55,7 @@
       <HBox alignment="BOTTOM_LEFT" layoutX="427.0" layoutY="307.0" prefHeight="50.0" prefWidth="50.0" spacing="16.0">
          <children>
             <Button maxHeight="31.0" maxWidth="50.0" minHeight="31.0" minWidth="50.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="31.0" prefWidth="50.0" text="OK" />
-            <Button maxHeight="31.0" maxWidth="75.0" minHeight="31.0" minWidth="75.0" mnemonicParsing="false" onAction="#limpar" prefHeight="31.0" prefWidth="75.0" text="Cancelar" />
+            <Button fx:id="btnCancelar" maxHeight="31.0" maxWidth="75.0" minHeight="31.0" minWidth="75.0" mnemonicParsing="false" onAction="#limpar" prefHeight="31.0" prefWidth="75.0" text="Cancelar" />
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

@@ -31,7 +31,7 @@ public class LoginController {
 	protected void autenticar(ActionEvent event) {
 		if (Login.autenticar(login.getText(), senha.getText())) {
 			try {
-				Principal.telaPrincipal();
+				Principal.criarTela("Principal.fxml", true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

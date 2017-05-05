@@ -41,32 +41,32 @@ public class PrincipalController {
 
 	@FXML
 	private void abrePesquisar(ActionEvent event) throws Exception {
-		Principal.telaPesquisa();
+		Principal.criarTela("Pesquisar");
 		Principal.setSubTitulo("Pesquisar Filme");
 
 	}
 
 	@FXML
 	private void abreCadastroFuncionarios(ActionEvent event) throws Exception {
-		Principal.telaCadastroFuncionarios();
+		Principal.criarTela("CadastroFuncionario");
 		Principal.setSubTitulo("Cadastrar Funcionário");
 	}
 
 	@FXML
 	private void abreCadastroClientes(ActionEvent event) throws Exception {
-		Principal.telaCadastroClientes();
+		Principal.criarTela("CadastroCliente");
 		Principal.setSubTitulo("Cadastrar Cliente");
 	}
 
 	@FXML
 	private void abreCadastroAlbuns(ActionEvent event) throws Exception {
-		Principal.telaCadastroAlbuns();
+		Principal.criarTela("CadastroAlbum");
 		Principal.setSubTitulo("Cadastrar Album");
 	}
 
 	@FXML
 	private void abreCadastroFilmes(ActionEvent event) throws Exception {
-		Principal.telaCadastroFilmes();
+		Principal.criarTela("CadastroFilme");
 		Principal.setSubTitulo("Cadastrar Filme");
 	}
 }
