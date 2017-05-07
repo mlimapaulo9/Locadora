@@ -73,7 +73,7 @@ public class Album extends Midia {
 		Gson gson = new Gson();
 
 		Container<Album> func = new Container<Album>();
-		try (Reader res = new FileReader("src/data/albuns.db")) {
+		try (Reader res = new FileReader("data/albuns.db")) {
 			func = gson.fromJson(res, album);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class Album extends Midia {
 	public static void salvar() {
 		Gson gson = new Gson();
 
-		try (FileWriter writer = new FileWriter("src/data/albuns.db")) {
+		try (FileWriter writer = new FileWriter("data/albuns.db")) {
 
 			gson.toJson(Album.getAlbuns(), writer);
 

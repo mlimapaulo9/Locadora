@@ -2,14 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -22,61 +25,81 @@
             <content>
               <AnchorPane>
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Título" />
-                        <TextField fx:id="filmeTitulo" layoutX="13.0" layoutY="31.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Label layoutX="14.0" layoutY="61.0" text="Gênero" />
-                        <TextField fx:id="filmeGenero" layoutX="13.0" layoutY="78.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Label layoutX="14.0" layoutY="108.0" text="Ano" />
-                        <Button layoutX="57.0" layoutY="171.0" mnemonicParsing="false" onAction="#pesquisarFilme" text="Pesquisar" />
-                        <ComboBox fx:id="filmeAno" layoutX="16.0" layoutY="125.0" prefWidth="150.0" />
-                        <VBox layoutX="183.0" layoutY="1.0" prefHeight="340.0" prefWidth="417.0" spacing="7.0">
+                        <HBox prefHeight="341.0" prefWidth="600.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
+                              <VBox prefHeight="200.0" prefWidth="170.0" spacing="7.0">
                                  <children>
-                                    <Label text="Título">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resFilmeTitulo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                    <Label text="Título" />
+                                    <TextField fx:id="filmeTitulo" />
+                                    <Label text="Gênero" />
+                                    <TextField fx:id="filmeGenero" />
+                                    <Label text="Ano" />
+                                    <HBox alignment="CENTER_LEFT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" spacing="16.0">
+                                       <children>
+                                          <ComboBox fx:id="filmeAno" />
+                                          <CheckBox fx:id="incluirAno" mnemonicParsing="false" onAction="#toggleAno" selected="true" text="Incluir ano" />
+                                       </children>
+                                    </HBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Button defaultButton="true" mnemonicParsing="false" onAction="#pesquisarFilme" text="Pesquisar" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="15.0" />
+                                       </padding>
+                                    </VBox>
                                  </children>
                               </VBox>
-                              <VBox layoutX="20.0" layoutY="10.0" maxWidth="400.0" prefHeight="34.0">
+                              <Separator orientation="VERTICAL" prefHeight="360.0" />
+                              <VBox prefHeight="200.0" prefWidth="395.0" spacing="7.0">
                                  <children>
-                                    <Label text="Diretor">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resFilmeDiretor" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
-                                 <children>
-                                    <Label text="Gênero">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resFilmeGenero" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
-                                 <children>
-                                    <Label text="Ano">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resFilmeAno" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Título">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resFilmeTitulo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Diretor">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resFilmeDiretor" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Gênero">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resFilmeGenero" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Ano">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resFilmeAno" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                            </padding>
-                        </VBox>
-                        <Separator layoutX="180.0" layoutY="-19.0" orientation="VERTICAL" prefHeight="360.0" />
+                        </HBox>
                      </children>
                   </AnchorPane>
             </content>
@@ -85,51 +108,66 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Título" />
-                        <TextField fx:id="albumTitulo" layoutX="13.0" layoutY="31.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Label layoutX="14.0" layoutY="61.0" text="Autor/Banda" />
-                        <TextField fx:id="albumAutor" layoutX="13.0" layoutY="78.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Label layoutX="14.0" layoutY="108.0" text="Estilo" />
-                        <TextField fx:id="albumEstilo" layoutX="13.0" layoutY="125.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Button layoutX="57.0" layoutY="171.0" mnemonicParsing="false" onAction="#pesquisarAlbum" text="Pesquisar" />
-                        <VBox layoutX="183.0" layoutY="1.0" prefHeight="340.0" prefWidth="417.0" spacing="7.0">
+                        <HBox prefHeight="371.0" prefWidth="600.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
+                              <VBox prefHeight="200.0" prefWidth="170.0" spacing="7.0">
                                  <children>
-                                    <Label text="Título">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resAlbumTitulo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                    <Label text="Título" />
+                                    <TextField fx:id="albumTitulo" prefHeight="25.0" prefWidth="155.0" />
+                                    <Label text="Autor/Banda" />
+                                    <TextField fx:id="albumAutor" prefHeight="25.0" prefWidth="155.0" />
+                                    <Label text="Estilo" />
+                                    <TextField fx:id="albumEstilo" prefHeight="25.0" prefWidth="155.0" />
+                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Button defaultButton="true" mnemonicParsing="false" onAction="#pesquisarAlbum" text="Pesquisar" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="15.0" />
+                                       </padding>
+                                    </VBox>
                                  </children>
                               </VBox>
-                              <VBox layoutX="20.0" layoutY="10.0" maxWidth="400.0" prefHeight="34.0">
+                              <Separator orientation="VERTICAL" prefHeight="360.0" />
+                              <VBox prefHeight="200.0" prefWidth="395.0" spacing="7.0">
                                  <children>
-                                    <Label text="Autor/Banda">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resAlbumAutor" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
-                                 <children>
-                                    <Label text="Estilo">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resAlbumEstilo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Título">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resAlbumTitulo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Autor/Banda">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resAlbumAutor" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Estilo">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resAlbumEstilo" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                            </padding>
-                        </VBox>
-                        <Separator layoutX="180.0" layoutY="-9.0" orientation="VERTICAL" prefHeight="360.0" />
+                        </HBox>
                      </children>
                   </AnchorPane>
                </content>
@@ -138,69 +176,84 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Nome" />
-                        <TextField fx:id="clienteNome" layoutX="13.0" layoutY="31.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Label layoutX="14.0" layoutY="61.0" text="CPF" />
-                        <TextField fx:id="clienteCPF" layoutX="13.0" layoutY="78.0" prefHeight="25.0" prefWidth="155.0" />
-                        <Button layoutX="57.0" layoutY="124.0" mnemonicParsing="false" onAction="#pesquisarCliente" text="Pesquisar" />
-                        <VBox layoutX="183.0" layoutY="1.0" prefHeight="340.0" prefWidth="417.0" spacing="7.0">
+                        <HBox prefHeight="341.0" prefWidth="600.0" spacing="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
+                              <VBox prefHeight="200.0" prefWidth="170.0" spacing="7.0">
                                  <children>
-                                    <Label text="Nome">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resClienteNome" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                    <Label text="Nome" />
+                                    <TextField fx:id="clienteNome" prefHeight="25.0" prefWidth="155.0" />
+                                    <Label text="CPF" />
+                                    <TextField fx:id="clienteCPF" prefHeight="25.0" prefWidth="155.0" />
+                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Button defaultButton="true" mnemonicParsing="false" onAction="#pesquisarCliente" text="Pesquisar" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="15.0" />
+                                       </padding>
+                                    </VBox>
                                  </children>
                               </VBox>
-                              <VBox layoutX="20.0" layoutY="10.0" maxWidth="400.0" prefHeight="34.0">
+                              <Separator orientation="VERTICAL" prefHeight="365.0" />
+                              <VBox prefHeight="200.0" prefWidth="395.0" spacing="7.0">
                                  <children>
-                                    <Label text="CPF">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resClienteCPF" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
-                                 <children>
-                                    <Label text="Endereço">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resClienteEndereco" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="400.0" prefHeight="34.0">
-                                 <children>
-                                    <Label text="CEP">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="resClienteCEP" maxWidth="400.0" style="-fx-font-style: italic;" />
-                                 </children>
-                              </VBox>
-                              <VBox maxHeight="200.0" maxWidth="400.0" prefHeight="200.0">
-                                 <children>
-                                    <Label text="Relação de Itens Alugados">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView fx:id="resClienteAlugados" maxHeight="148.0" maxWidth="397.0" prefHeight="200.0" prefWidth="380.0" />
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Nome">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resClienteNome" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="CPF">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resClienteCPF" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Endereço">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resClienteEndereco" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="400.0" prefHeight="34.0">
+                                       <children>
+                                          <Label text="CEP">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="resClienteCEP" maxWidth="400.0" style="-fx-font-style: italic;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="200.0" maxWidth="400.0" prefHeight="200.0">
+                                       <children>
+                                          <Label text="Relação de Itens Alugados">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <ListView fx:id="resClienteAlugados" maxHeight="148.0" maxWidth="397.0" prefHeight="200.0" prefWidth="380.0" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                            </padding>
-                        </VBox>
-                        <Separator layoutX="180.0" layoutY="-17.0" orientation="VERTICAL" prefHeight="365.0" />
+                        </HBox>
                      </children>
                   </AnchorPane>
                </content>
@@ -211,5 +264,18 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
+      <VBox layoutY="270.0" prefHeight="100.0" prefWidth="200.0" spacing="7.0">
+         <children>
+            <Label fx:id="lblResultado" alignment="TOP_CENTER" maxHeight="40.0" maxWidth="170.0" minHeight="40.0" minWidth="170.0" visible="false">
+               <font>
+                  <Font name="System Bold Italic" size="11.0" />
+               </font>
+            </Label>
+            <Pagination fx:id="pages" disable="true" maxHeight="40.0" maxPageIndicatorCount="5" maxWidth="170.0" minHeight="40.0" minWidth="170.0" pageCount="100" />
+         </children>
+         <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+         </padding>
+      </VBox>
    </children>
 </Pane>

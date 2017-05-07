@@ -1,12 +1,18 @@
 package controller;
 
+import java.util.Optional;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
+import model.Cliente;
+import model.utils.Sessao;
 import view.Principal;
 
 public class PrincipalController {
@@ -36,6 +42,35 @@ public class PrincipalController {
 	@FXML
 	private void sair() {
 		Platform.exit();
+	}
+
+	@FXML
+	private void novaSessao() {
+		String resultado;
+		boolean sair = false;
+		do {
+			resultado = Principal.abrirJanelaCPF();
+
+			if (resultado.equals("cancelar"))
+				sair = true;
+
+			Cliente cliente = Cliente.buscarCPF(resultado);
+			if (cliente != null) {
+				Sessao nova = new Sessao(cliente);
+				Principal.setSessao(nova);
+				sair = true;
+			}
+		} while (!sair);
+	}
+
+	@FXML
+	private void confirmarSessao() {
+		
+	}
+
+	@FXML
+	private void cancelarSessao() {
+		Principal.setSessao(null);
 	}
 
 	@FXML

@@ -1,10 +1,12 @@
 package model;
 
+import java.util.List;
+
 public abstract class Midia {
 	protected int id;
 	protected String titulo;
 	protected int quantidade;
-	protected int alugados;
+	protected List<Integer> alugadoPor;
 
 	public int getId() {
 		return id;
@@ -36,18 +38,25 @@ public abstract class Midia {
 		}	
 	}
 
-	public int getAlugados() {
-		return this.alugados;
+	public List<Integer> getAlugadores() {
+		return this.alugadoPor;
 	}
 
-	public void setAlugados(int alugados) {
-		if (alugados >= 0 && alugados <= this.getQuantidade())
+	public void setAlugadores(List<Integer> alugados) {
+		if (alugados.size() >= 0 && alugados.size() <= this.getQuantidade())
 		{
-			this.alugados = alugados;
+			this.alugadoPor = alugados;
 		}
 		else {
 			throw new IllegalArgumentException("Número de itens alugados não pode exceder a quantidade disponível.");
 		}		
 	}
-
+	
+	public void addAlugador(int id) {
+		this.alugadoPor.add(id);
+	}
+	
+	public void removeAlugador(int index) {
+		this.alugadoPor.remove(index);
+	}
 }

@@ -19,6 +19,14 @@
                   <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Aluguel">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#novaSessao" text="Novo Aluguel" />
+                  <MenuItem mnemonicParsing="false" onAction="#confirmarSessao" text="Confirmar Aluguel" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#cancelarSessao" text="Cancelar Aluguel" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Cadastros">
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#abrePesquisar" text="Pesquisar" />

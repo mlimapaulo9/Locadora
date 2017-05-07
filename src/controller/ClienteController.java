@@ -12,7 +12,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import model.Cliente;
 import model.Endereco;
-import model.Midia;
 import model.utils.exceptions.AtributoEmUsoException;
 import view.Principal;
 
@@ -105,7 +104,8 @@ public class ClienteController {
 
 		if (!temErro) {
 			temp.setEndereco(tempEnd);
-			temp.setAlugados(new ArrayList<Midia>());
+			temp.setFilmesAlugados(new ArrayList<Integer>());
+			temp.setAlbunsAlugados(new ArrayList<Integer>());
 			temp.setId(Integer.parseInt(id.getText()));
 
 			Cliente.add(temp);

@@ -17,7 +17,7 @@
       <VBox prefHeight="300.0" prefWidth="600.0" spacing="7.0">
          <children>
             <Label fx:id="lblNome" text="Nome de Usuário" />
-            <TextField fx:id="nome" prefHeight="31.0" prefWidth="547.0" />
+            <TextField fx:id="nome" minHeight="31.0" prefHeight="31.0" prefWidth="547.0" />
             <Label fx:id="lblCargo" text="Cargo" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0">
                <children>
@@ -30,7 +30,7 @@
                </children>
             </HBox>
             <Label fx:id="lblSenha" text="Senha" />
-            <PasswordField fx:id="senha" prefHeight="31.0" prefWidth="547.0" />
+            <PasswordField fx:id="senha" minHeight="31.0" prefHeight="31.0" prefWidth="547.0" />
             <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="100.0">
                <children>
                   <VBox maxHeight="-Infinity" maxWidth="100.0" minHeight="55.0" minWidth="100.0" prefWidth="100.0" spacing="7.0" visible="false">

@@ -70,7 +70,7 @@ public class Funcionario extends Usuario {
 		Gson gson = new Gson();
 
 		Container<Funcionario> func = new Container<Funcionario>();
-		try (Reader res = new FileReader("src/data/funcionarios.db")) {
+		try (Reader res = new FileReader("data/funcionarios.db")) {
 			func = gson.fromJson(res, funcionario);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class Funcionario extends Usuario {
 	public static void salvar() {
 		Gson gson = new Gson();
 
-		try (FileWriter writer = new FileWriter("src/data/funcionarios.db")) {
+		try (FileWriter writer = new FileWriter("data/funcionarios.db")) {
 
 			gson.toJson(Funcionario.getFuncionarios(), writer);
 

@@ -1,1 +1,0 @@
-{"lista":[{"cpf":"12345678910","endereco":{"logradouro":"Rua Sem Fim","bairro":"Centro","numero":"123A","cep":"12345678"},"alugados":[],"id":1,"nome":"Fulano"},{"cpf":"12345678911","endereco":{"logradouro":"Avenida Alberto Maranhão","bairro":"Centro","numero":"145","cep":"12345678"},"alugados":[],"id":2,"nome":"Fulano"}],"quant":2,"lastId":2}

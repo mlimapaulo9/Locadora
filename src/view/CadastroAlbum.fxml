@@ -15,11 +15,11 @@
       <VBox prefHeight="300.0" prefWidth="600.0" spacing="7.0">
          <children>
             <Label text="Título" />
-            <TextField fx:id="titulo" prefHeight="31.0" prefWidth="547.0" />
+            <TextField fx:id="titulo" minHeight="31.0" prefHeight="31.0" prefWidth="547.0" />
             <Label text="Autor/Banda" />
-            <TextField fx:id="nomeBanda" prefHeight="31.0" prefWidth="547.0" />
+            <TextField fx:id="nomeBanda" minHeight="31.0" prefHeight="31.0" prefWidth="547.0" />
             <Label text="Estilo" />
-            <TextField fx:id="estilo" prefHeight="31.0" prefWidth="547.0" />
+            <TextField fx:id="estilo" minHeight="31.0" prefHeight="31.0" prefWidth="547.0" />
             <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="100.0">
                <children>
                   <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="7.0">

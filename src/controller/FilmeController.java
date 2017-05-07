@@ -1,7 +1,7 @@
 package controller;
 
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -68,7 +68,7 @@ public class FilmeController {
 				erros += e2.getMessage() + "\n";
 				temErro = true;
 			} catch (AtributoEmUsoException e2) {
-				erros += "Esse filme já está cadastrado para esse(a) diretor(a)!";
+				erros += "Esse filme já está cadastrado para esse(a) diretor(a)! \n";
 				temErro = true;
 			}
 			finally {
@@ -95,7 +95,8 @@ public class FilmeController {
 
 		if (!temErro) {
 			temp.setQuantidade(quant.getValue());
-			temp.setAlugados(0);
+			temp.setAlugadores(new ArrayList<Integer>());
+			temp.setAno(ano.getValue());
 			
 			temp.setId(Integer.parseInt(id.getText()));
 			Filme.add(temp);

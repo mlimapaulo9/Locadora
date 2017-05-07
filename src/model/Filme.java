@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -77,7 +79,7 @@ public class Filme extends Midia {
 	public void setTitulo(String titulo, boolean forceSet) {
 		if (titulo.isEmpty()) {
 			throw new IllegalArgumentException("Título inválido!");
-		} else if (!forceSet && Filme.buscarTitulo(titulo) != null) {
+		} else if (!forceSet && Filme.buscarTitulo(titulo, false) != null) {
 			throw new AtributoEmUsoException("Título");
 		} else {
 			super.titulo = titulo;
@@ -92,7 +94,7 @@ public class Filme extends Midia {
 		Gson gson = new Gson();
 
 		Container<Filme> func = new Container<Filme>();
-		try (Reader res = new FileReader("src/data/filmes.db")) {
+		try (Reader res = new FileReader("data/filmes.db")) {
 			func = gson.fromJson(res, filme);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -103,7 +105,7 @@ public class Filme extends Midia {
 	public static void salvar() {
 		Gson gson = new Gson();
 
-		try (FileWriter writer = new FileWriter("src/data/filmes.db")) {
+		try (FileWriter writer = new FileWriter("data/filmes.db")) {
 
 			gson.toJson(Filme.getFilmes(), writer);
 
@@ -127,14 +129,22 @@ public class Filme extends Midia {
 		getFilmes().setQuant(-1);
 	}
 
-	public static Filme buscarTitulo(String titulo) {
+	public static List<Filme> buscarTitulo(String titulo, boolean maisDeUm) {
+		List<Filme> lista = new ArrayList<Filme>();
 
 		for (int i = 0; i < getFilmes().getQuant(); i++) {
-			if (titulo.equalsIgnoreCase(getFilmes().getLista().get(i).getTitulo())) {
-				return getFilmes().getLista().get(i);
+			if (getFilmes().getLista().get(i).getTitulo().toLowerCase().contains(titulo)) {
+				lista.add(getFilmes().getLista().get(i));
+
+				if (!maisDeUm)
+					break;
 			}
 		}
-		return null;
+		if (lista.size() > 0) {
+			return lista;
+		} else {
+			return null;
+		}
 	}
 
 	public static Filme buscarDiretor(String diretor) {
@@ -147,14 +157,40 @@ public class Filme extends Midia {
 		return null;
 	}
 
-	public static Filme buscarGenero(String genero) {
+	public static List<Filme> buscarGenero(String genero, boolean maisDeUm) {
+		List<Filme> lista = new ArrayList<Filme>();
 
 		for (int i = 0; i < getFilmes().getQuant(); i++) {
-			if (genero.equalsIgnoreCase(getFilmes().getLista().get(i).getGenero())) {
-				return getFilmes().getLista().get(i);
+			if (getFilmes().getLista().get(i).getGenero().toLowerCase().contains(genero)) {
+				lista.add(getFilmes().getLista().get(i));
+
+				if (!maisDeUm)
+					break;
 			}
 		}
-		return null;
+		if (lista.size() > 0) {
+			return lista;
+		} else {
+			return null;
+		}
+	}
+	
+	public static List<Filme> buscarAno(int ano, boolean maisDeUm) {
+		List<Filme> lista = new ArrayList<Filme>();
+		
+		for (int i = 0; i < getFilmes().getQuant(); i++) {
+			if (ano == getFilmes().getLista().get(i).getAno()) {
+				lista.add(getFilmes().getLista().get(i));
+				
+				if (!maisDeUm)
+					break;
+			}
+		}
+		if (lista.size() > 0) {
+			return lista;
+		} else {
+			return null;
+		}
 	}
 
 	public static int getLastId() {

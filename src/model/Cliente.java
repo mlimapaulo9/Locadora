@@ -18,10 +18,12 @@ import view.Principal;
 public class Cliente extends Usuario {
 	private String cpf;
 	private Endereco endereco;
-	private List<Midia> alugados;
+	private List<Integer> filmesAlugados;
+	private List<Integer> albunsAlugados;
 	
 	public Cliente() {
-		this.alugados = new ArrayList<Midia>();
+		this.filmesAlugados = new ArrayList<Integer>();
+		this.albunsAlugados = new ArrayList<Integer>();
 	}
 
 	public String getCPF() {
@@ -46,25 +48,36 @@ public class Cliente extends Usuario {
 		this.endereco = endereco;
 	}
 
-	public List<Midia> getAlugados() {
-		return this.alugados;
+	public List<Integer> getFilmesAlugados() {
+		return this.filmesAlugados;
 	}
 
-	public void setAlugados(List<Midia> alugados) {
-		this.alugados = alugados;
+	public void setFilmesAlugados(List<Integer> alugados) {
+		this.filmesAlugados = alugados;
 	}
 
-	public void addAlugado(Midia alugado) {
-		this.getAlugados().add(alugado);
+	public void addFilmeAlugado(Integer alugado) {
+		this.getFilmesAlugados().add(alugado);
 	}
 
-	public Midia removeAlugado(int pos) {
-		Midia temp;
+	public Integer removeFilmeAlugado(int pos) {
+		return this.getFilmesAlugados().remove(pos);
+	}
+	
+	public List<Integer> getAlbunsAlugados() {
+		return this.albunsAlugados;
+	}
 
-		temp = this.getAlugados().get(pos);
-		this.getAlugados().remove(pos);
+	public void setAlbunsAlugados(List<Integer> alugados) {
+		this.albunsAlugados = alugados;
+	}
 
-		return temp;
+	public void addAlbumAlugado(Integer alugado) {
+		this.getAlbunsAlugados().add(alugado);
+	}
+
+	public Integer removeAlbumAlugado(int pos) {
+		return this.getAlbunsAlugados().remove(pos);
 	}
 
 	public void setNome(String nome) {
@@ -83,7 +96,7 @@ public class Cliente extends Usuario {
 		Gson gson = new Gson();
 
 		Container<Cliente> func = new Container<Cliente>();
-		try (Reader res = new FileReader("src/data/clientes.db")) {
+		try (Reader res = new FileReader("data/clientes.db")) {
 			func = gson.fromJson(res, cliente);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -94,7 +107,7 @@ public class Cliente extends Usuario {
 	public static void salvar() {
 		Gson gson = new Gson();
 
-		try (FileWriter writer = new FileWriter("src/data/clientes.db")) {
+		try (FileWriter writer = new FileWriter("data/clientes.db")) {
 
 			gson.toJson(Cliente.getClientes(), writer);
 

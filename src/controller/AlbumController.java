@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -84,7 +86,7 @@ public class AlbumController {
 
 		if (!temErro) {
 			temp.setQuantidade(quant.getValue());
-			temp.setAlugados(0);
+			temp.setAlugadores(new ArrayList<Integer>());
 			
 			temp.setId(Integer.parseInt(id.getText()));
 			Album.add(temp);

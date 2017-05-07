@@ -1,17 +1,23 @@
 package view;
 
+import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
 import model.Cliente;
 import model.Filme;
 import model.Funcionario;
 import model.utils.Container;
+import model.utils.Sessao;
 
 public class Principal extends Application {
 
@@ -21,6 +27,7 @@ public class Principal extends Application {
 	private static Container<Cliente> clientes;
 	private static Container<Album> albuns;
 	private static Container<Filme> filmes;
+	private static Sessao sessao = null;
 
 	private static boolean isAdmin;
 	private static boolean debug = true;
@@ -87,8 +94,33 @@ public class Principal extends Application {
 		Principal.palco = palco;
 	}
 
-	public Stage getPalco() {
+	public static Stage getPalco() {
 		return Principal.palco;
+	}
+	
+	public static Sessao getSessao() {
+		return Principal.sessao;
+	}
+	
+	public static void setSessao(Sessao sessao) {
+		Principal.sessao = sessao;
+	}
+	
+	public static String abrirJanelaCPF() {
+		final String titulo = "Iniciar Sessão";
+		Dialog<String> dialog = new Dialog<String>();
+		dialog = new TextInputDialog();
+		dialog.setTitle(titulo);
+		dialog.setHeaderText("Entre com o CPF do Cliente (somente números).");
+		 
+		Optional<String> result = dialog.showAndWait();
+		String entrada = "cancelar";
+		 
+		if (result.isPresent()) {
+		 
+		    entrada = result.get();
+		}
+		return entrada;
 	}
 
 	public static void telaLogin() throws Exception {
@@ -126,6 +158,26 @@ public class Principal extends Application {
 			raiz.getChildren().get(0).toFront();
 			raiz.getChildren().get(0).setLayoutY(30);
 			Principal.getSubTitulo().toFront();
+
+			Scene cena = new Scene(raiz);
+			palco.setScene(cena);
+			palco.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void criarSubTela(String fxmlFile) {
+		try {
+			Stage palco = new Stage();
+			FXMLLoader loader = new FXMLLoader(Principal.class.getResource(fxmlFile + ".fxml"));
+			Pane raiz = loader.load();
+			
+			palco.setTitle("LocaMídia");
+			palco.resizableProperty().setValue(Boolean.FALSE);
+			palco.initOwner(Principal.getPalco());
+			palco.initModality(Modality.WINDOW_MODAL);
+			
 
 			Scene cena = new Scene(raiz);
 			palco.setScene(cena);
