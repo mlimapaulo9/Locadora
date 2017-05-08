@@ -5,11 +5,14 @@ import java.util.Optional;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import model.Cliente;
 import model.utils.Sessao;
@@ -24,10 +27,15 @@ public class PrincipalController {
 	private Label subTitulo;
 	@FXML
 	private MenuItem menuFuncionario;
+	@FXML
+	private ImageView imgConta;
 
 	@FXML
 	public void initialize() {
 		Principal.setSubTitulo((Label) subTitulo);
+		Principal.setImagemConta(imgConta);
+		Tooltip tp = new Tooltip("Nenhuma sessão inicializada.");
+		Tooltip.install(imgConta, tp);
 		if (!Principal.isAdmin()) {
 			menuFuncionario.setVisible(false);
 		}
@@ -49,28 +57,44 @@ public class PrincipalController {
 		String resultado;
 		boolean sair = false;
 		do {
+			String tmp = "";
 			resultado = Principal.abrirJanelaCPF();
 
-			if (resultado.equals("cancelar"))
+			if (resultado.equals("cancelar")) {
 				sair = true;
+				break;
+			}
 
 			Cliente cliente = Cliente.buscarCPF(resultado);
 			if (cliente != null) {
 				Sessao nova = new Sessao(cliente);
 				Principal.setSessao(nova);
+				tmp = "CPF: " + cliente.getCPF() + "\nNome: " + cliente.getNome();
+				Tooltip.install(Principal.getImagemConta(), new Tooltip(tmp));
+				Principal.getImagemConta().setOpacity(1);
 				sair = true;
 			}
+
+			if (!sair) {
+				Principal.abrirJanelaAlerta(AlertType.ERROR, null, "CPF inválido ou não encontrado, tente novamente!");
+			} else {
+				Principal.abrirJanelaAlerta(AlertType.INFORMATION, "Sessão inicializada!", tmp);
+			}
+
 		} while (!sair);
 	}
 
 	@FXML
 	private void confirmarSessao() {
-		
+
 	}
 
 	@FXML
 	private void cancelarSessao() {
 		Principal.setSessao(null);
+		Tooltip.install(Principal.getImagemConta(), new Tooltip("Nenhuma sessão inicializada."));
+		Principal.getImagemConta().setOpacity(0.4);
+		Principal.abrirJanelaAlerta(AlertType.INFORMATION, null, "Sessão encerrada!");
 	}
 
 	@FXML

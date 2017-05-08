@@ -192,6 +192,15 @@ public class Filme extends Midia {
 			return null;
 		}
 	}
+	
+	public static Filme buscarID(int id) {
+		for (Filme filme : getFilmes().getLista()) {
+			if (filme.getId() == id) {
+				return filme;
+			}
+		}
+		return null;
+	}
 
 	public static int getLastId() {
 		return Filme.getFilmes().getLastId();

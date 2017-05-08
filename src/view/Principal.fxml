@@ -5,6 +5,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -45,10 +47,15 @@
         </menus>
       </MenuBar>
       <Pane fx:id="painelPrincipal" layoutY="30.0" prefHeight="370.0" prefWidth="600.0" />
-      <Label fx:id="subTitulo" alignment="CENTER_RIGHT" layoutX="393.0" layoutY="6.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" textAlignment="RIGHT">
+      <Label fx:id="subTitulo" alignment="CENTER_RIGHT" layoutX="372.0" layoutY="6.0" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <ImageView fx:id="imgConta" fitHeight="50.0" fitWidth="26.0" layoutX="573.0" layoutY="2.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@account.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

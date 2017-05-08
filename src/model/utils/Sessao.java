@@ -34,8 +34,17 @@ public class Sessao {
 	public void adicionarFilme(Integer filmeID) {
 		this.getFilmesAlugados().add(filmeID);
 	}
-	public void removerItem(int index) {
-		this.getFilmesAlugados().remove(index);
+	public synchronized void removerFilme(Integer filmeID) {
+		Integer remover = null;
+		for (Integer id : getFilmesAlugados()) {
+			if (id == filmeID) {
+				remover = filmeID;
+				break;
+			}
+		}
+		if (remover != null) {
+			getFilmesAlugados().remove(remover);
+		}
 	}
 	public List<Integer> getAlbunsAlugados() {
 		return albunsAlugados;
@@ -43,10 +52,27 @@ public class Sessao {
 	public void setAlbunsAlugados(List<Integer> albunsAlugados) {
 		this.albunsAlugados = albunsAlugados;
 	}
-	public void adicionarAlbum(Integer filmeID) {
-		this.getAlbunsAlugados().add(filmeID);
+	public void adicionarAlbum(Integer albumID) {
+		this.getAlbunsAlugados().add(albumID);
 	}
-	public void removerAlbum(int index) {
-		this.getAlbunsAlugados().remove(index);
+	public synchronized void removerAlbum(Integer albumID) {
+		Integer remover = null;
+		for (Integer id : getAlbunsAlugados()) {
+			if (id == albumID) {
+				remover = albumID;
+				break;
+			}
+		}
+		if (remover != null) {
+			getAlbunsAlugados().remove(remover);
+		}
+	}
+	
+	public String toString() {
+		String tmp = "";
+		tmp += "Cliente: " + getCliente().getNome();
+		tmp += "\nFilmes: " + getFilmesAlugados().toString();
+		tmp += "\nAlbuns: " + getAlbunsAlugados().toString();
+		return tmp;
 	}
 }

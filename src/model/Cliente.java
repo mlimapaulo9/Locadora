@@ -153,6 +153,15 @@ public class Cliente extends Usuario {
 		}
 		return null;
 	}
+	
+	public static Cliente buscarID(int id) {
+		for (Cliente cliente : getClientes().getLista()) {
+			if (cliente.getId() == id) {
+				return cliente;
+			}
+		}
+		return null;
+	}
 
 	public static int getLastId() {
 		return Cliente.getClientes().getLastId();

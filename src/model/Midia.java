@@ -1,18 +1,19 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Midia {
-	protected int id;
+	protected Integer id;
 	protected String titulo;
-	protected int quantidade;
-	protected List<Integer> alugadoPor;
+	protected Integer quantidade;
+	protected List<Integer> alugadoPor = new ArrayList<Integer>();
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -24,11 +25,11 @@ public abstract class Midia {
 		this.titulo = titulo;
 	}
 
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		if (quantidade > 0 && quantidade <= 5)
 		{
 			this.quantidade = quantidade;
@@ -52,11 +53,11 @@ public abstract class Midia {
 		}		
 	}
 	
-	public void addAlugador(int id) {
+	public void addAlugador(Integer id) {
 		this.alugadoPor.add(id);
 	}
 	
-	public void removeAlugador(int index) {
+	public void removeAlugador(Integer index) {
 		this.alugadoPor.remove(index);
 	}
 }

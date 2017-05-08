@@ -1,14 +1,18 @@
 package view;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,7 +26,9 @@ import model.utils.Sessao;
 public class Principal extends Application {
 
 	private static Stage palco;
+	private static Pane subPalco;
 	private static Label subTitulo;
+	private static ImageView imagemConta;
 	private static Container<Funcionario> funcionarios;
 	private static Container<Cliente> clientes;
 	private static Container<Album> albuns;
@@ -39,6 +45,7 @@ public class Principal extends Application {
 	@Override
 	public void start(Stage palco) throws Exception {
 		Principal.setAdmin(false);
+		Principal.setSessao(null);
 		Principal.funcionarios = Funcionario.carregar();
 		Principal.albuns = Album.carregar();
 		Principal.filmes = Filme.carregar();
@@ -77,6 +84,14 @@ public class Principal extends Application {
 	public static Container<Cliente> getClientes() {
 		return Principal.clientes;
 	}
+	
+	public static ImageView getImagemConta() {
+		return Principal.imagemConta;
+	}
+	
+	public static void setImagemConta(ImageView img) {
+		Principal.imagemConta = img;
+	}
 
 	public static Label getSubTitulo() {
 		return Principal.subTitulo;
@@ -97,9 +112,23 @@ public class Principal extends Application {
 	public static Stage getPalco() {
 		return Principal.palco;
 	}
+	public static void setSubPalco(Pane palco) {
+		Principal.subPalco = palco;
+	}
+
+	public static Pane getSubPalco() {
+		return Principal.subPalco;
+	}
 	
 	public static Sessao getSessao() {
 		return Principal.sessao;
+	}
+	
+	public static boolean temSessao() {
+		if (getSessao() != null) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static void setSessao(Sessao sessao) {
@@ -122,6 +151,16 @@ public class Principal extends Application {
 		}
 		return entrada;
 	}
+	
+	public static void abrirJanelaAlerta(AlertType tipo, String cabecalho, String mensagem) {
+		Alert alerta = new Alert(tipo);
+		Principal.log(tipo.toString());
+		alerta.setTitle(tipo.toString());
+		alerta.setHeaderText(cabecalho);
+		alerta.setContentText(mensagem);
+		
+		alerta.showAndWait();
+	}
 
 	public static void telaLogin() throws Exception {
 		try {
@@ -141,27 +180,31 @@ public class Principal extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void telaPrincipal() throws Exception{
+		FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
+		Pane raiz = loader.load();
+		
+		raiz.getChildren().get(0).toFront();
 
-	public static void criarTela(String fxmlFile) {
-		Principal.criarTela(fxmlFile, false);
+		Principal.getSubTitulo().toFront();
+		Principal.getImagemConta().toFront();
+		
+		Principal.setSubPalco(raiz);
+		
+		Scene cena = new Scene(raiz);
+		palco.setScene(cena);
+		palco.show();
 	}
-
-	public static void criarTela(String fxmlFile, boolean isPrincipal) {
+	
+	public static void criarTela(String fxmlFile) {
 		try {
-			FXMLLoader loader = new FXMLLoader(Principal.class.getResource("Principal.fxml"));
-			Pane raiz = loader.load();
-
-			if (!isPrincipal) {
-				Pane subPane = FXMLLoader.load(Principal.class.getResource(fxmlFile + ".fxml"));
-				raiz.getChildren().set(1, subPane);
-			}
-			raiz.getChildren().get(0).toFront();
+			Pane raiz = Principal.getSubPalco();
+			
+			Pane subPane = FXMLLoader.load(Principal.class.getResource(fxmlFile + ".fxml"));
+			raiz.getChildren().set(0, subPane);
 			raiz.getChildren().get(0).setLayoutY(30);
-			Principal.getSubTitulo().toFront();
-
-			Scene cena = new Scene(raiz);
-			palco.setScene(cena);
-			palco.show();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
