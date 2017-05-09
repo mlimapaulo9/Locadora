@@ -1,1 +1,1 @@
-{"lista":[{"nomeBanda":"Pink Floyd","estilo":"Rock","id":1,"titulo":"The dark side of the moon","quantidade":2,"alugadosPor":[]}],"quant":1,"lastId":1}
+{"lista":[{"nomeBanda":"Pink Floyd","estilo":"Rock","id":1,"titulo":"The dark side of the moon","quantidade":2,"alugadoPor":[]},{"nomeBanda":"Evanescence","estilo":"Rock","id":2,"titulo":"Fallen","quantidade":5,"alugadoPor":[]}],"quant":2,"lastId":2}

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Platform;
@@ -65,7 +66,14 @@ public class PrincipalController {
 				break;
 			}
 
-			Cliente cliente = Cliente.buscarCPF(resultado);
+			List<Cliente> clienteList = Cliente.buscarCPF(resultado, false);
+			
+			Cliente cliente;
+			try {
+				cliente = clienteList.get(0);
+			} catch (IndexOutOfBoundsException e) {
+				cliente = null;
+			}
 			if (cliente != null) {
 				Sessao nova = new Sessao(cliente);
 				Principal.setSessao(nova);

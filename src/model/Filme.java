@@ -79,7 +79,7 @@ public class Filme extends Midia {
 	public void setTitulo(String titulo, boolean forceSet) {
 		if (titulo.isEmpty()) {
 			throw new IllegalArgumentException("Título inválido!");
-		} else if (!forceSet && Filme.buscarTitulo(titulo, false) != null) {
+		} else if (!forceSet && Filme.buscarTitulo(titulo, false).size() != 0) {
 			throw new AtributoEmUsoException("Título");
 		} else {
 			super.titulo = titulo;
@@ -133,18 +133,14 @@ public class Filme extends Midia {
 		List<Filme> lista = new ArrayList<Filme>();
 
 		for (int i = 0; i < getFilmes().getQuant(); i++) {
-			if (getFilmes().getLista().get(i).getTitulo().toLowerCase().contains(titulo)) {
+			if (getFilmes().getLista().get(i).getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
 				lista.add(getFilmes().getLista().get(i));
 
 				if (!maisDeUm)
 					break;
 			}
 		}
-		if (lista.size() > 0) {
-			return lista;
-		} else {
-			return null;
-		}
+		return lista;
 	}
 
 	public static Filme buscarDiretor(String diretor) {
@@ -168,11 +164,7 @@ public class Filme extends Midia {
 					break;
 			}
 		}
-		if (lista.size() > 0) {
-			return lista;
-		} else {
-			return null;
-		}
+		return lista;
 	}
 	
 	public static List<Filme> buscarAno(int ano, boolean maisDeUm) {

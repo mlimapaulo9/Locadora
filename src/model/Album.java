@@ -27,7 +27,7 @@ public class Album extends Midia {
 	public void setTitulo(String titulo, boolean forceSet) {
 		if (titulo.isEmpty()) {
 			throw new IllegalArgumentException("Título inválido!");
-		} else if (!forceSet && Album.buscarTitulo(titulo, false) != null) {
+		} else if (!forceSet && Album.buscarTitulo(titulo, false).size() != 0) {
 			throw new AtributoEmUsoException("Título");
 		} else {
 			super.titulo = titulo;
@@ -41,7 +41,7 @@ public class Album extends Midia {
 	public void setNomeBanda(String nomeBanda, boolean forceSet) {
 		if (nomeBanda.isEmpty()) {
 			throw new IllegalArgumentException("Nome de banda/autor inválido!");
-		} else if (!forceSet && Album.buscarBanda(nomeBanda, false) != null) {
+		} else if (!forceSet && Album.buscarBanda(nomeBanda, false).size() != 0) {
 			throw new AtributoEmUsoException("Nome de banda/autor");
 		} else {
 			this.nomeBanda = nomeBanda;
@@ -115,7 +115,7 @@ public class Album extends Midia {
 		List<Album> lista = new ArrayList<Album>();
 
 		for (int i = 0; i < getAlbuns().getQuant(); i++) {
-			if (getAlbuns().getLista().get(i).getTitulo().toLowerCase().contains(titulo)) {
+			if (getAlbuns().getLista().get(i).getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
 				lista.add(getAlbuns().getLista().get(i));
 
 				if (!maisDeUm)
@@ -129,7 +129,7 @@ public class Album extends Midia {
 		List<Album> lista = new ArrayList<Album>();
 
 		for (int i = 0; i < getAlbuns().getQuant(); i++) {
-			if (getAlbuns().getLista().get(i).getNomeBanda().toLowerCase().contains(banda)) {
+			if (getAlbuns().getLista().get(i).getNomeBanda().toLowerCase().contains(banda.toLowerCase())) {
 				lista.add(getAlbuns().getLista().get(i));
 
 				if (!maisDeUm)
@@ -143,7 +143,7 @@ public class Album extends Midia {
 		List<Album> lista = new ArrayList<Album>();
 
 		for (int i = 0; i < getAlbuns().getQuant(); i++) {
-			if (getAlbuns().getLista().get(i).getEstilo().toLowerCase().contains(estilo)) {
+			if (getAlbuns().getLista().get(i).getEstilo().toLowerCase().contains(estilo.toLowerCase())) {
 				lista.add(getAlbuns().getLista().get(i));
 
 				if (!maisDeUm)

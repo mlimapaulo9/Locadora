@@ -12,7 +12,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import model.Cliente;
 import model.Endereco;
-import model.utils.exceptions.AtributoEmUsoException;
+import model.utils.exceptions.*;
 import view.Principal;
 
 public class ClienteController {

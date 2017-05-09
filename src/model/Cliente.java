@@ -20,7 +20,7 @@ public class Cliente extends Usuario {
 	private Endereco endereco;
 	private List<Integer> filmesAlugados;
 	private List<Integer> albunsAlugados;
-	
+
 	public Cliente() {
 		this.filmesAlugados = new ArrayList<Integer>();
 		this.albunsAlugados = new ArrayList<Integer>();
@@ -33,7 +33,7 @@ public class Cliente extends Usuario {
 	public void setCPF(String cpf) {
 		if (cpf.isEmpty() || cpf.length() < 11) {
 			throw new IllegalArgumentException("CPF inválido! O CPF deve ter 11 digitos númericos.");
-		} else if (Cliente.buscarCPF(cpf) != null) {
+		} else if (Cliente.buscarCPF(cpf, false).size() != 0) {
 			throw new AtributoEmUsoException("CPF");
 		} else {
 			this.cpf = cpf;
@@ -63,7 +63,7 @@ public class Cliente extends Usuario {
 	public Integer removeFilmeAlugado(int pos) {
 		return this.getFilmesAlugados().remove(pos);
 	}
-	
+
 	public List<Integer> getAlbunsAlugados() {
 		return this.albunsAlugados;
 	}
@@ -132,28 +132,46 @@ public class Cliente extends Usuario {
 	}
 
 	public static Cliente buscarNome(String nome) {
+		List<Cliente> lista = buscarNome(nome, false);
 
-		for (int i = 0; i < getClientes().getQuant(); i++) {
-			if (nome.equalsIgnoreCase(getClientes().getLista().get(i).getNome())) {
-				return getClientes().getLista().get(i);
-			}
-		}
-		return null;
-	}
-
-	public static Cliente buscarCPF(String cpf) {
-
-		if (cpf.length() < 11)
+		if (lista != null && lista.size() > 0) {
+			return lista.get(0);
+		} else {
 			return null;
+		}
+	}
+
+	public static List<Cliente> buscarNome(String nome, boolean maisDeUm) {
+		List<Cliente> lista = new ArrayList<Cliente>();
 
 		for (int i = 0; i < getClientes().getQuant(); i++) {
-			if (cpf.equalsIgnoreCase(getClientes().getLista().get(i).getCPF())) {
-				return getClientes().getLista().get(i);
+			if (getClientes().getLista().get(i).getNome().toLowerCase().contains(nome.toLowerCase())) {
+				lista.add(getClientes().getLista().get(i));
+
+				if (!maisDeUm)
+					break;
 			}
 		}
-		return null;
+		return lista;
 	}
-	
+
+	public static List<Cliente> buscarCPF(String cpf, boolean maisDeUm) {
+		List<Cliente> lista = new ArrayList<Cliente>();
+		
+		if (!maisDeUm && cpf.length() < 11)
+			return lista;
+			
+		for (int i = 0; i < getClientes().getQuant(); i++) {
+			if (getClientes().getLista().get(i).getCPF().contains(cpf)) {
+				lista.add(getClientes().getLista().get(i));
+
+				if (!maisDeUm)
+					break;
+			}
+		}
+		return lista;
+	}
+
 	public static Cliente buscarID(int id) {
 		for (Cliente cliente : getClientes().getLista()) {
 			if (cliente.getId() == id) {

@@ -72,7 +72,7 @@ public class FilmeController {
 				temErro = true;
 			}
 			finally {
-				temp.setDiretor(titulo.getText(), true);
+				temp.setDiretor(diretor.getText(), true);
 			}
 		}
 		if (temp.getTitulo() == null) {
@@ -113,8 +113,7 @@ public class FilmeController {
 			java.awt.Toolkit.getDefaultToolkit().beep();
 		}
 
-		lblErros.setVisible(true);
-		
+		lblErros.setVisible(true);		
 	}
 
 	@FXML
