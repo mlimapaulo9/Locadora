@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import model.utils.Container;
@@ -47,7 +48,7 @@ public class Cliente extends Usuario {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
 	public boolean isFilmesAlugadosAllNegative() {
 		for (Integer i : getFilmesAlugados()) {
 			if (i > 0) {
@@ -56,7 +57,7 @@ public class Cliente extends Usuario {
 		}
 		return false;
 	}
-	
+
 	public List<Integer> getFilmesAlugados() {
 		return this.filmesAlugados;
 	}
@@ -79,7 +80,7 @@ public class Cliente extends Usuario {
 	public Integer removeFilmeAlugado(int pos) {
 		return this.getFilmesAlugados().remove(pos);
 	}
-	
+
 	public boolean isAlbunsAlugadosAllNegative() {
 		for (Integer i : getAlbunsAlugados()) {
 			if (i > 0) {
@@ -88,7 +89,7 @@ public class Cliente extends Usuario {
 		}
 		return false;
 	}
-	
+
 	public List<Integer> getAlbunsAlugados() {
 		return this.albunsAlugados;
 	}
@@ -137,7 +138,12 @@ public class Cliente extends Usuario {
 	}
 
 	public static void salvar() {
-		Gson gson = new Gson();
+		Gson gson;
+		if (Principal.isDebugging()) {
+			gson = new GsonBuilder().setPrettyPrinting().create();
+		} else {
+			gson = new Gson();
+		}
 
 		try (FileWriter writer = new FileWriter("data/clientes.db")) {
 

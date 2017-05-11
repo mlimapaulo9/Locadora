@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import model.utils.Container;
@@ -103,7 +104,12 @@ public class Filme extends Midia {
 	}
 
 	public static void salvar() {
-		Gson gson = new Gson();
+		Gson gson;
+		if (Principal.isDebugging()) {
+			gson = new GsonBuilder().setPrettyPrinting().create();
+		} else {
+			gson = new Gson();
+		}
 
 		try (FileWriter writer = new FileWriter("data/filmes.db")) {
 

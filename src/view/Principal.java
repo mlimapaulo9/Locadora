@@ -1,16 +1,14 @@
 package view;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
@@ -35,8 +33,6 @@ public class Principal extends Application {
 	private static Container<Cliente> clientes;
 	private static Container<Album> albuns;
 	private static Container<Filme> filmes;
-	private static Sessao sessao = null;
-	private static Integer idSubTela = 0;
 
 	private static boolean isAdmin;
 	private static boolean debug = true;
@@ -48,7 +44,8 @@ public class Principal extends Application {
 	@Override
 	public void start(Stage palco) throws Exception {
 		Principal.setAdmin(false);
-		Principal.setSessao(null);
+		anulaSessaoInstance();
+		
 		Principal.funcionarios = Funcionario.carregar();
 		Principal.albuns = Album.carregar();
 		Principal.filmes = Filme.carregar();
@@ -58,8 +55,12 @@ public class Principal extends Application {
 		Principal.telaLogin();
 	}
 	
+	public static boolean isDebugging() {
+		return debug;
+	}
+	
 	public static void log(String message) {
-		if (Principal.debug) {
+		if (Principal.isDebugging()) {
 			System.out.println(message);
 		}
 	}
@@ -88,14 +89,6 @@ public class Principal extends Application {
 		return Principal.clientes;
 	}
 	
-	public static Integer getIdSubTela() {
-		return idSubTela;
-	}
-
-	public static void setIdSubTela(Integer idSubTela) {
-		Principal.idSubTela = idSubTela;
-	}
-
 	public static ImageView getImagemConta() {
 		return Principal.imagemConta;
 	}
@@ -131,20 +124,57 @@ public class Principal extends Application {
 		return Principal.subPalco;
 	}
 	
+	
+	//Sessao
 	public static Sessao getSessao() {
-		return Principal.sessao;
+		return Sessao.getInstance();
+	}
+	
+	public static void anulaSessaoInstance() {
+		Sessao.anulaInstance();
 	}
 	
 	public static boolean temSessao() {
-		if (getSessao() != null) {
+		if (Sessao.getInstanciaUnica() != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public static void setSessao(Sessao sessao) {
-		Principal.sessao = sessao;
+	public static void alterarSessao(boolean b) {
+		Sessao.setAlterou(b);
 	}
+	public static boolean alterouSessao() {
+		return Sessao.alterou();
+	}
+	
+	public static void alteraClienteSessao(Cliente cliente) {
+		Sessao.setCliente(cliente);
+	}
+	
+	public static Cliente getClienteSessao() {
+		return Sessao.getCliente();
+	}
+	
+	public static List<Integer> getAlbunsAlugados() {
+		return Sessao.getAlbunsAlugados();
+	}
+	public static List<Integer> getFilmesAlugados() {
+		return Sessao.getFilmesAlugados();
+	}
+	public static void removerFilmeSessao(Integer filmeID) {
+		Sessao.removerFilme(filmeID);
+	}
+	public static void adicionarFilmeSessao(Integer filmeID) {
+		Sessao.adicionarFilme(filmeID);
+	}
+	public static void removerAlbumSessao(Integer albumID) {
+		Sessao.removerAlbum(albumID);
+	}
+	public static void adicionarAlbumSessao(Integer albumID) {
+		Sessao.adicionarAlbum(albumID);
+	}
+	
+	//FIM SESSAO
 	
 	public static String abrirJanelaCPF() {
 		final String titulo = "Iniciar Sessão";

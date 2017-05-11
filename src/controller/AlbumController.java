@@ -47,8 +47,6 @@ public class AlbumController {
 		boolean temErro = false;
 		Album temp = new Album();
 		
-		Principal.log(Album.buscarBanda("Evanescence", false).toString());
-		
 		try {
 			temp.setNomeBanda(nomeBanda.getText());
 		} catch (IllegalArgumentException e) {

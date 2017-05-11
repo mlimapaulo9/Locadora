@@ -4,55 +4,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Cliente;
-import view.Principal;
 
 public class Sessao {
-	private Cliente cliente;
-	private List<Integer> filmesAlugados;
-	private List<Integer> albunsAlugados;
-	private boolean alterou;
-
-	public Sessao(Cliente cliente) {
-		setCliente(cliente);
-		filmesAlugados = new ArrayList<Integer>(cliente.getFilmesAlugados());
-		albunsAlugados = new ArrayList<Integer>(cliente.getAlbunsAlugados());
-		alterou = false;
-	}
+	private static Cliente cliente;
+	private static List<Integer> filmesAlugados;
+	private static List<Integer> albunsAlugados;
+	private static boolean alterou;
+	private static Sessao instanciaUnica;
 
 	public Sessao() {
 		filmesAlugados = new ArrayList<Integer>();
 		albunsAlugados = new ArrayList<Integer>();
 		alterou = false;
 	}
-	public boolean alterou() {
+	
+	public static void anulaInstance() {
+		instanciaUnica = null;
+	}
+	
+	public static Sessao getInstance() {
+		if (instanciaUnica == null) {
+			instanciaUnica = new Sessao();
+		}
+		return instanciaUnica;
+	}
+	
+	public static Sessao getInstanciaUnica() {
+		return instanciaUnica;
+	}
+	public static boolean alterou() {
 		return alterou;
 	}
-	public void setAlterou(boolean b) {
-		this.alterou = b;
+	public static void setAlterou(boolean b) {
+		Sessao.alterou = b;
 	}
-	public Cliente getCliente() {
+	public static Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public static void setCliente(Cliente cliente) {
+		Sessao.cliente = cliente;
+		filmesAlugados = new ArrayList<Integer>(cliente.getFilmesAlugados());
+		albunsAlugados = new ArrayList<Integer>(cliente.getAlbunsAlugados());
+		alterou = false;
 	}
 
-	public List<Integer> getFilmesAlugados() {
+	public static List<Integer> getFilmesAlugados() {
 		return filmesAlugados;
 	}
 
-	public void setFilmesAlugados(List<Integer> filmesAlugados) {
-		this.filmesAlugados = filmesAlugados;
+	public static void setFilmesAlugados(List<Integer> filmesAlugados) {
+		Sessao.filmesAlugados = filmesAlugados;
 		alterou = true;
 	}
 
-	public void adicionarFilme(Integer filmeID) {
-		this.getFilmesAlugados().add(filmeID);
+	public static void adicionarFilme(Integer filmeID) {
+		getFilmesAlugados().add(filmeID);
 		alterou = true;
 	}
 
-	public void removerFilme(Integer filmeID) {
+	public static void removerFilme(Integer filmeID) {
 		if (filmeID == -1) {
 			List<Integer> temp = new ArrayList<Integer>();
 			setFilmesAlugados(temp);
@@ -71,21 +82,21 @@ public class Sessao {
 		alterou = true;
 	}
 
-	public List<Integer> getAlbunsAlugados() {
+	public static List<Integer> getAlbunsAlugados() {
 		return albunsAlugados;
 	}
 
-	public void setAlbunsAlugados(List<Integer> albunsAlugados) {
-		this.albunsAlugados = albunsAlugados;
+	public static void setAlbunsAlugados(List<Integer> albunsAlugados) {
+		Sessao.albunsAlugados = albunsAlugados;
 		alterou = true;
 	}
 
-	public void adicionarAlbum(Integer albumID) {
-		this.getAlbunsAlugados().add(albumID);
+	public static void adicionarAlbum(Integer albumID) {
+		getAlbunsAlugados().add(albumID);
 		alterou = true;
 	}
 
-	public void removerAlbum(Integer albumID) {
+	public static void removerAlbum(Integer albumID) {
 		if (albumID == -1) {
 			List<Integer> temp = new ArrayList<Integer>();
 			setAlbunsAlugados(temp);

@@ -314,11 +314,11 @@ public class PesquisarController {
 			resFilmeQuantidade.setText(Integer.toString(filme.getQuantidade()));
 			incluidosSessao = 0;
 			if (Principal.temSessao()) {
-				if (Principal.getSessao().getFilmesAlugados().contains((Integer) filme.getId())
-						&& !filme.getAlugadores().contains((Integer) Principal.getSessao().getCliente().getId())) {
+				if (Principal.getFilmesAlugados().contains((Integer) filme.getId())
+						&& !filme.getAlugadores().contains((Integer) Principal.getClienteSessao().getId())) {
 					incluidosSessao++;
-				} else if (!Principal.getSessao().getFilmesAlugados().contains((Integer) filme.getId())
-						&& filme.getAlugadores().contains((Integer) Principal.getSessao().getCliente().getId())) {
+				} else if (!Principal.getFilmesAlugados().contains((Integer) filme.getId())
+						&& filme.getAlugadores().contains((Integer) Principal.getClienteSessao().getId())) {
 					incluidosSessao--;
 				}
 			}
@@ -334,11 +334,11 @@ public class PesquisarController {
 			resAlbumQuantidade.setText(album.getQuantidade().toString());
 			incluidosSessao = 0;
 			if (Principal.temSessao()) {
-				if (Principal.getSessao().getAlbunsAlugados().contains((Integer) album.getId())
-						&& !album.getAlugadores().contains((Integer) Principal.getSessao().getCliente().getId())) {
+				if (Principal.getAlbunsAlugados().contains((Integer) album.getId())
+						&& !album.getAlugadores().contains((Integer) Principal.getClienteSessao().getId())) {
 					incluidosSessao++;
-				} else if (!Principal.getSessao().getAlbunsAlugados().contains((Integer) album.getId())
-						&& album.getAlugadores().contains((Integer) Principal.getSessao().getCliente().getId())) {
+				} else if (!Principal.getAlbunsAlugados().contains((Integer) album.getId())
+						&& album.getAlugadores().contains((Integer) Principal.getClienteSessao().getId())) {
 					incluidosSessao--;
 				}
 			}
@@ -356,14 +356,14 @@ public class PesquisarController {
 			resClienteEndereco.setText(endereco);
 			resClienteCEP.setText(cliente.getEndereco().getCEP());
 			ObservableList<String> itens = FXCollections.observableArrayList();
-			if (Principal.temSessao() && Principal.getSessao().getCliente().getId() == cliente.getId()) {
-				for (Integer iFilme : Principal.getSessao().getFilmesAlugados()) {
+			if (Principal.temSessao() && Principal.getClienteSessao().getId() == cliente.getId()) {
+				for (Integer iFilme : Principal.getFilmesAlugados()) {
 					if (iFilme > 0) {
 						Filme temp = Filme.buscarID(iFilme);
 						itens.add("F#" + temp.getId() + ": " + temp.getTitulo());
 					}
 				}
-				for (Integer iAlbum : Principal.getSessao().getAlbunsAlugados()) {
+				for (Integer iAlbum : Principal.getAlbunsAlugados()) {
 					if (iAlbum > 0) {
 						Album temp = Album.buscarID(iAlbum);
 						itens.add("A#" + temp.getId() + ": " + temp.getTitulo());
@@ -419,7 +419,7 @@ public class PesquisarController {
 		case "model.Filme":
 			Filme filme = (Filme) obj;
 			if (Principal.temSessao()) {
-				if (Principal.getSessao().getFilmesAlugados().contains(filme.getId())) {
+				if (Principal.getFilmesAlugados().contains(filme.getId())) {
 					btnDevolverFilme.setDisable(false);
 					btnAlugarFilme.setDisable(true);
 				} else {
@@ -436,7 +436,7 @@ public class PesquisarController {
 		case "model.Album":
 			Album album = (Album) obj;
 			if (Principal.temSessao()) {
-				if (Principal.getSessao().getAlbunsAlugados().contains(album.getId())) {
+				if (Principal.getAlbunsAlugados().contains(album.getId())) {
 					btnDevolverAlbum.setDisable(false);
 					btnAlugarAlbum.setDisable(true);
 				} else {
@@ -453,8 +453,9 @@ public class PesquisarController {
 		case "model.Cliente":
 			Cliente cliente = (Cliente) obj;
 			if (Principal.temSessao()) {
-				if ((isListaPositiva(Principal.getSessao().getFilmesAlugados()) || isListaPositiva(Principal.getSessao().getAlbunsAlugados()))
-						&& cliente.getId() == Principal.getSessao().getCliente().getId()) {
+				Principal.log("entrou cliente");
+				if ((isListaPositiva(Principal.getFilmesAlugados()) || isListaPositiva(Principal.getAlbunsAlugados()))
+						&& cliente.getId() == Principal.getClienteSessao().getId()) {
 					btnDevolverTodos.setDisable(false);
 					btnDevolverSelecionados.setDisable(false);
 				} else {
@@ -470,7 +471,6 @@ public class PesquisarController {
 	private boolean isListaPositiva(List<Integer> lista) {
 		for (Integer i : lista) {
 			if (i > 0) {
-				Principal.log("lista: " + lista.toString());
 				return true;
 			}
 		}
@@ -481,18 +481,18 @@ public class PesquisarController {
 	private void alugar(ActionEvent event) {
 		switch (((Button) event.getSource()).getId()) {
 		case "btnAlugarFilme":
-			if (Principal.getSessao().getFilmesAlugados().contains(-Integer.parseInt(resFilmeID.getText()))) {
-				Principal.getSessao().removerFilme(-Integer.parseInt(resFilmeID.getText()));
+			if (Principal.getFilmesAlugados().contains(-Integer.parseInt(resFilmeID.getText()))) {
+				Principal.removerFilmeSessao(-Integer.parseInt(resFilmeID.getText()));
 			}
-			Principal.getSessao().adicionarFilme(Integer.parseInt(resFilmeID.getText()));
+			Principal.adicionarFilmeSessao(Integer.parseInt(resFilmeID.getText()));
 			atualizaBotoes(Filme.buscarID(Integer.parseInt(resFilmeID.getText())));
 			resFilmeAlugados.setText(Integer.toString((Integer.parseInt(resFilmeAlugados.getText()) + 1)));
 			break;
 		case "btnAlugarAlbum":
-			if (Principal.getSessao().getAlbunsAlugados().contains(-Integer.parseInt(resAlbumID.getText()))) {
-				Principal.getSessao().removerAlbum(-Integer.parseInt(resAlbumID.getText()));
+			if (Principal.getAlbunsAlugados().contains(-Integer.parseInt(resAlbumID.getText()))) {
+				Principal.removerAlbumSessao(-Integer.parseInt(resAlbumID.getText()));
 			}
-			Principal.getSessao().adicionarAlbum(Integer.parseInt(resAlbumID.getText()));
+			Principal.adicionarAlbumSessao(Integer.parseInt(resAlbumID.getText()));
 			atualizaBotoes(Album.buscarID(Integer.parseInt(resAlbumID.getText())));
 			resAlbumAlugados.setText(Integer.toString((Integer.parseInt(resAlbumAlugados.getText()) + 1)));
 			break;
@@ -507,14 +507,14 @@ public class PesquisarController {
 		Pattern aRegex = Pattern.compile("A#([0-9]+):");
 		switch (((Button) event.getSource()).getId()) {
 		case "btnDevolverFilme":
-			Principal.getSessao().removerFilme(Integer.parseInt(resFilmeID.getText()));
-			Principal.getSessao().adicionarFilme(-Integer.parseInt(resFilmeID.getText()));
+			Principal.removerFilmeSessao(Integer.parseInt(resFilmeID.getText()));
+			Principal.adicionarFilmeSessao(-Integer.parseInt(resFilmeID.getText()));
 			atualizaBotoes(Filme.buscarID(Integer.parseInt(resFilmeID.getText())));
 			resFilmeAlugados.setText(Integer.toString((Integer.parseInt(resFilmeAlugados.getText()) - 1)));
 			break;
 		case "btnDevolverAlbum":
-			Principal.getSessao().removerAlbum(Integer.parseInt(resAlbumID.getText()));
-			Principal.getSessao().adicionarAlbum(-Integer.parseInt(resAlbumID.getText()));
+			Principal.removerAlbumSessao(Integer.parseInt(resAlbumID.getText()));
+			Principal.adicionarAlbumSessao(-Integer.parseInt(resAlbumID.getText()));
 			atualizaBotoes(Album.buscarID(Integer.parseInt(resAlbumID.getText())));
 			resAlbumAlugados.setText(Integer.toString((Integer.parseInt(resAlbumAlugados.getText()) - 1)));
 			break;
@@ -528,16 +528,16 @@ public class PesquisarController {
 				if (matcher.find()) {
 					Integer tempID = Integer.parseInt(matcher.group(1));
 					todos.remove(i);
-					Principal.getSessao().removerFilme((int) tempID);
-					Principal.getSessao().adicionarFilme((int) -tempID);
+					Principal.removerFilmeSessao((int) tempID);
+					Principal.adicionarFilmeSessao((int) -tempID);
 				} else if (matcher2.find()) {
 					Integer tempID = Integer.parseInt(matcher2.group(1));
 					todos.remove(i);
-					Principal.getSessao().removerAlbum((int) tempID);
-					Principal.getSessao().adicionarAlbum((int) -tempID);
+					Principal.removerAlbumSessao((int) tempID);
+					Principal.adicionarAlbumSessao((int) -tempID);
 				}
 			}
-			setaDados("cliente", Principal.getSessao().getCliente());
+			setaDados("cliente", Principal.getClienteSessao());
 			break;
 		case "btnDevolverTodos":
 			ObservableList<String> todos2 = resClienteAlugados.getItems();
@@ -548,16 +548,16 @@ public class PesquisarController {
 				if (matcher.find()) {
 					Integer tempID = Integer.parseInt(matcher.group(1));
 					// todos2.remove(i);
-					Principal.getSessao().removerFilme((int) tempID);
-					Principal.getSessao().adicionarFilme((int) -tempID);
+					Principal.removerFilmeSessao((int) tempID);
+					Principal.adicionarFilmeSessao((int) -tempID);
 				} else if (matcher2.find()) {
 					Integer tempID = Integer.parseInt(matcher2.group(1));
 					// todos2.remove(i);
-					Principal.getSessao().removerAlbum((int) tempID);
-					Principal.getSessao().adicionarAlbum((int) -tempID);
+					Principal.removerAlbumSessao((int) tempID);
+					Principal.adicionarAlbumSessao((int) -tempID);
 				}
 			}
-			setaDados("cliente", Principal.getSessao().getCliente());
+			setaDados("cliente", Principal.getClienteSessao());
 			break;
 		}
 
