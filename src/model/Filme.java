@@ -45,7 +45,7 @@ public class Filme extends Midia {
 	public void setDiretor(String diretor, boolean forceSet) {
 		if (diretor.isEmpty()) {
 			throw new IllegalArgumentException("Diretor inválido!");
-		} else if (!forceSet && Filme.buscarDiretor(diretor) != null) {
+		} else if (!forceSet && Filme.buscarDiretor(diretor, true).size() != 0) {
 			throw new AtributoEmUsoException("Nome do Diretor");
 		} else {
 			this.diretor = diretor;
@@ -143,14 +143,18 @@ public class Filme extends Midia {
 		return lista;
 	}
 
-	public static Filme buscarDiretor(String diretor) {
-
+	public static List<Filme> buscarDiretor(String diretor, boolean maisDeUm) {
+		List<Filme> lista = new ArrayList<Filme>();
+		
 		for (int i = 0; i < getFilmes().getQuant(); i++) {
-			if (diretor.equalsIgnoreCase(getFilmes().getLista().get(i).getDiretor())) {
-				return getFilmes().getLista().get(i);
+			if (getFilmes().getLista().get(i).getDiretor().toLowerCase().contains(diretor)) {
+				lista.add(getFilmes().getLista().get(i));
+				
+				if (!maisDeUm)
+					break;
 			}
 		}
-		return null;
+		return lista;
 	}
 
 	public static List<Filme> buscarGenero(String genero, boolean maisDeUm) {

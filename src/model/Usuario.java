@@ -2,14 +2,14 @@ package model;
 
 public abstract class Usuario {
 
-	protected int id;
+	protected Integer id;
 	protected String nome;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -47,12 +47,28 @@ public class Cliente extends Usuario {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
+	
+	public boolean isFilmesAlugadosAllNegative() {
+		for (Integer i : getFilmesAlugados()) {
+			if (i > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List<Integer> getFilmesAlugados() {
 		return this.filmesAlugados;
 	}
 
 	public void setFilmesAlugados(List<Integer> alugados) {
+		setFilmesAlugados(alugados, false);
+	}
+
+	public void setFilmesAlugados(List<Integer> alugados, boolean forceSet) {
+		if (forceSet) {
+			this.filmesAlugados = new ArrayList<Integer>();
+		}
 		this.filmesAlugados = alugados;
 	}
 
@@ -63,12 +79,28 @@ public class Cliente extends Usuario {
 	public Integer removeFilmeAlugado(int pos) {
 		return this.getFilmesAlugados().remove(pos);
 	}
-
+	
+	public boolean isAlbunsAlugadosAllNegative() {
+		for (Integer i : getAlbunsAlugados()) {
+			if (i > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List<Integer> getAlbunsAlugados() {
 		return this.albunsAlugados;
 	}
 
 	public void setAlbunsAlugados(List<Integer> alugados) {
+		setAlbunsAlugados(alugados, false);
+	}
+
+	public void setAlbunsAlugados(List<Integer> alugados, boolean forceSet) {
+		if (forceSet) {
+			this.albunsAlugados = new ArrayList<Integer>();
+		}
 		this.albunsAlugados = alugados;
 	}
 
@@ -131,6 +163,11 @@ public class Cliente extends Usuario {
 		getClientes().setQuant(-1);
 	}
 
+	public static void removeObj(Cliente cliente) {
+		getClientes().removeObj(cliente);
+		getClientes().setQuant(-1);
+	}
+
 	public static Cliente buscarNome(String nome) {
 		List<Cliente> lista = buscarNome(nome, false);
 
@@ -157,10 +194,10 @@ public class Cliente extends Usuario {
 
 	public static List<Cliente> buscarCPF(String cpf, boolean maisDeUm) {
 		List<Cliente> lista = new ArrayList<Cliente>();
-		
+
 		if (!maisDeUm && cpf.length() < 11)
 			return lista;
-			
+
 		for (int i = 0; i < getClientes().getQuant(); i++) {
 			if (getClientes().getLista().get(i).getCPF().contains(cpf)) {
 				lista.add(getClientes().getLista().get(i));

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="200.0" maxWidth="250.0" minHeight="200.0" minWidth="250.0" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SobreController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="200.0" maxWidth="250.0" minHeight="200.0" minWidth="250.0" spacing="7.0">
+         <children>
+            <Label text="LocaMídia 2017">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txt" editable="false" maxHeight="170.0" maxWidth="220.0" minHeight="170.0" minWidth="220.0" text="Programa fictício elaborado de forma&#10;exclusiva para a disciplina de POO.&#10;&#10;Autores:&#10;Noberto Negreiros&#10;Marcus Paulo &#10;&#10;Este programa utiliza a bibloteca&#10;Gson v2.8.0, da Google, Inc." />
+         </children>
+      </VBox>
+   </children>
+</Pane>

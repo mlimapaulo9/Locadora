@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
@@ -34,6 +36,7 @@ public class Principal extends Application {
 	private static Container<Album> albuns;
 	private static Container<Filme> filmes;
 	private static Sessao sessao = null;
+	private static Integer idSubTela = 0;
 
 	private static boolean isAdmin;
 	private static boolean debug = true;
@@ -85,6 +88,14 @@ public class Principal extends Application {
 		return Principal.clientes;
 	}
 	
+	public static Integer getIdSubTela() {
+		return idSubTela;
+	}
+
+	public static void setIdSubTela(Integer idSubTela) {
+		Principal.idSubTela = idSubTela;
+	}
+
 	public static ImageView getImagemConta() {
 		return Principal.imagemConta;
 	}
@@ -154,7 +165,6 @@ public class Principal extends Application {
 	
 	public static void abrirJanelaAlerta(AlertType tipo, String cabecalho, String mensagem) {
 		Alert alerta = new Alert(tipo);
-		Principal.log(tipo.toString());
 		alerta.setTitle(tipo.toString());
 		alerta.setHeaderText(cabecalho);
 		alerta.setContentText(mensagem);
@@ -219,8 +229,7 @@ public class Principal extends Application {
 			palco.setTitle("LocaMídia");
 			palco.resizableProperty().setValue(Boolean.FALSE);
 			palco.initOwner(Principal.getPalco());
-			palco.initModality(Modality.WINDOW_MODAL);
-			
+			palco.initModality(Modality.WINDOW_MODAL);			
 
 			Scene cena = new Scene(raiz);
 			palco.setScene(cena);
@@ -229,5 +238,4 @@ public class Principal extends Application {
 			e.printStackTrace();
 		}
 	}
-
 }

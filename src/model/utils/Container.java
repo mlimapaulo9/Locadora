@@ -23,6 +23,10 @@ public class Container<T> {
 	public void remove(int index) {
 		this.lista.remove(index);
 	}
+	
+	public void removeObj(T obj) {
+		this.lista.remove(obj);
+	}
 
 	public int getQuant() {
 		return quant;

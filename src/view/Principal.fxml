@@ -21,12 +21,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Aluguel">
+            <Menu mnemonicParsing="false" text="Sessão">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#novaSessao" text="Novo Aluguel" />
-                  <MenuItem mnemonicParsing="false" onAction="#confirmarSessao" text="Confirmar Aluguel" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#cancelarSessao" text="Cancelar Aluguel" />
+                  <MenuItem mnemonicParsing="false" onAction="#novaSessao" text="Nova Sessão" />
+                  <MenuItem fx:id="menuConfirmarOperacoes" mnemonicParsing="false" onAction="#confirmarOperacoes" text="Confirmar Operações" />
+                  <SeparatorMenuItem fx:id="menuSep" mnemonicParsing="false" />
+                  <MenuItem fx:id="menuEncerrarSessao" mnemonicParsing="false" onAction="#encerrarSessao" text="Encerrar Sessão" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Cadastros">
@@ -41,7 +41,7 @@
             </Menu>
           <Menu mnemonicParsing="false" text="Ajuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Sobre" />
+              <MenuItem mnemonicParsing="false" onAction="#abrirSobre" text="Sobre" />
             </items>
           </Menu>
         </menus>
